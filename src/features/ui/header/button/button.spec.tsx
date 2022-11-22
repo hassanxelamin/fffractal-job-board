@@ -3,7 +3,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 
 import { RouterContext } from 'next/dist/shared/lib/router-context';
-import { createMockRouter } from '../../../utils/test-utils/createMockRouter';
+import { createMockRouter } from '../../../../utils/test-utils/createMockRouter';
 import '@testing-library/jest-dom';
 
 import { ButtonGradient } from './button';
