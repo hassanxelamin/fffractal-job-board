@@ -60,6 +60,8 @@
     "react/react-in-jsx-scope": 0,
     "react/no-unescaped-entities": ["off"],
     "semi": ["error", "always"],
-    "react/jsx-props-no-spreading": ["off"]
+    "react/jsx-props-no-spreading": ["off"],
+    "no-use-before-define": ["off"],
+    "@typescript-eslint/no-use-before-define": ["off"]
   }
 }
