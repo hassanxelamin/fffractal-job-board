@@ -59,6 +59,7 @@
     "react/no-unused-state": "warn",
     "react/react-in-jsx-scope": 0,
     "react/no-unescaped-entities": ["off"],
-    "semi": ["error", "always"]
+    "semi": ["error", "always"],
+    "react/jsx-props-no-spreading": ["off"]
   }
 }
