@@ -3,16 +3,18 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 // import { within } from '@storybook/testing-library';
 // import { expect } from '@storybook/jest';
-import { LogoGrouped } from '@features/ui/header/logo';
+import { Dropdown } from './dropdown';
 
 // Metadata of our component
 export default {
-  title: 'Components/Logo',
-  component: LogoGrouped,
-} as ComponentMeta<typeof LogoGrouped>;
+  title: 'Components/Dropdown',
+  component: Dropdown,
+} as ComponentMeta<typeof Dropdown>;
 
 // Base Template
-const Template: ComponentStory<typeof LogoGrouped> = (args) => (<LogoGrouped {...args} />);
+const Template: ComponentStory<typeof Dropdown> = (args) => (
+  <Dropdown {...args} />
+);
 
 // Story, a component variation consisting of a template + args
 export const Default = Template.bind({});

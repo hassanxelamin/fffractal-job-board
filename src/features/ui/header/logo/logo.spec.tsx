@@ -5,17 +5,17 @@ import { RouterContext } from 'next/dist/shared/lib/router-context';
 import { createMockRouter } from '../../../../utils/test-utils/createMockRouter';
 import '@testing-library/jest-dom';
 
-import { NavLogo } from './logo';
+import { LogoGrouped } from './components/logo-grouped';
 
-// it('has an anchor tag with href="/job-post"', () => {
-//   render(
-//     <RouterContext.Provider value={createMockRouter}>
-//       <NavLogo />
-//     </RouterContext.Provider>
-//   );
-//   expect(screen.getByTestId('logo-link')).toHaveAttribute('href', '/');
-//   expect(screen.getByTestId('name-link')).toHaveAttribute('href', '/');
-// });
+it('has an anchor tag with href="/job-post"', () => {
+  render(
+    <RouterContext.Provider value={createMockRouter}>
+      <LogoGrouped />
+    </RouterContext.Provider>
+  );
+  expect(screen.getByTestId('logo-link')).toHaveAttribute('href', '/');
+  expect(screen.getByTestId('name-link')).toHaveAttribute('href', '/');
+});
 
 describe('when button is clicked', () => {
   it('calls router.push with "/"', () => {
@@ -23,7 +23,7 @@ describe('when button is clicked', () => {
 
     render(
       <RouterContext.Provider value={router}>
-        <NavLogo />
+        <LogoGrouped />
       </RouterContext.Provider>
     );
 
@@ -37,7 +37,7 @@ describe('when button is clicked', () => {
 
     render(
       <RouterContext.Provider value={router}>
-        <NavLogo />
+        <LogoGrouped />
       </RouterContext.Provider>
     );
 
