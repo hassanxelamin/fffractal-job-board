@@ -15,7 +15,7 @@ export const NavBar = () => {
       </Menus>
     </Container>
   );
-}
+};
 
 const Container = styled.div`
   height: 120px;
