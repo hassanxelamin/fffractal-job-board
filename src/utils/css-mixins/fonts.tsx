@@ -1,5 +1,12 @@
 import { css } from 'styled-components';
 
+export const LogoFont = css`
+  font-family: 'Grotesk';
+  font-weight: 500;
+  font-size: 4rem;
+  letter-spacing: -0.2rem;
+`;
+
 export const Fonts = css`
   @font-face {
     font-family: 'Satoshi';
@@ -39,7 +46,8 @@ export const Fonts = css`
 
   @font-face {
     font-family: 'Grotesk';
-    src: url('/FoundersGrotesk.woff2') format('woff2');
+    src: url('/FoundersGrotesk.woff2') format('woff2'),
+      url('/FoundersGrotesk.woff') format('woff');
     font-weight: 500;
     font-style: normal;
     font-display: swap;

@@ -20,7 +20,8 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@features/*": ["src/features/*"],
     },
     "plugins": [
       {

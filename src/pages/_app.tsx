@@ -1,23 +1,18 @@
 import React from 'react';
 import type { AppProps } from 'next/app';
+import { Provider } from 'react-redux';
 
 /*
  * Styles
  */
-import { createGlobalStyle } from 'styled-components';
-import { Fonts, Reset, BaseStyles } from '@utils/css-mixins';
+import { GlobalStyles } from '@utils/css-mixins';
+import { store } from '../redux/store';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <>
-      <Base />
+    <Provider store={store}>
+      <GlobalStyles />
       <Component {...pageProps} />
-    </>
+    </Provider>
   );
 }
-
-const Base = createGlobalStyle`
-    ${Fonts}
-    ${Reset}
-    ${BaseStyles}
-`;

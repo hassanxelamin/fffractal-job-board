@@ -4,8 +4,8 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
-  experimental: {appDir: true},
   swcMinify: true,
+  optimizeFonts: false,
 }
 
 module.exports = nextConfig

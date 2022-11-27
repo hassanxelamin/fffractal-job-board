@@ -1,5 +1,10 @@
 import { css } from 'styled-components';
 
+export const GradientTextWrap = css`
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: rgb(0 0 0 / 40%);
+`;
+
 export const Gradient = css`
   @keyframes animatedgradient {
     0% {
