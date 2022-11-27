@@ -5,26 +5,69 @@ import Image from 'next/image';
 import Link from 'next/link';
 import uuid from 'react-uuid';
 import gsap from 'gsap';
+import { useSelector, useDispatch } from 'react-redux';
 import ItemsLoggedOut from './items';
+import type { RootState } from '../../../../redux/store';
+import { setTrue, setFalse } from '../../../../redux/slices/outside-click';
 
 export function Dropdown() {
   const [menuOpen, setIsMenuOpen] = useState(false);
-
+  // const { ref, isComponentVisible } = useComponentVisible(true);
   // const DropbownButton = useRef<HTMLButtonElement>(null);
-  const DropbownMenu = useRef<HTMLDivElement>(null);
+  // const DropbownMenu = useRef<HTMLDivElement>(null);
+
+  const isComponentVisible = useSelector(
+    (state: RootState) => state.closer.value
+  );
+
+  const dispatch = useDispatch();
+
+  const ref = useRef<any>(null);
+
+  const handleClickOutside = (ev: { target: any }) => {
+    if (ref.current && !ref.current.contains(ev.target)) {
+      dispatch(setFalse());
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside, true);
+    return () => {
+      document.removeEventListener('click', handleClickOutside, true);
+    };
+  }, []);
+
+  // const setVisibility = (initState: boolean) => {
+  //   setIsComponentVisible(initState);
+  // };
+
+  // -------- GSAP -----------
+
   const MenuTimeline = useRef<gsap.core.Timeline>();
 
   useEffect(() => {
-    MenuTimeline.current = gsap
-      .timeline({
-        defaults: {
-          duration: 0.1,
-          ease: 'power2.out',
-        },
-      })
-      .from('.dropdown-menu', { visibility: 'hidden' })
-      .to('.dropdown-menu', { visibility: 'visible' });
-  }, []);
+    if (isComponentVisible === false && menuOpen === true) {
+      MenuTimeline.current = gsap
+        .timeline({
+          defaults: {
+            duration: 0.1,
+            ease: 'power2.out',
+          },
+        })
+        .to('.dropdown-menu', { visibility: 'visible' });
+      // .to('.dropdown-menu', { visibility: 'visible' });
+    } else {
+      MenuTimeline.current = gsap
+        .timeline({
+          defaults: {
+            duration: 0.1,
+            ease: 'power2.out',
+          },
+        })
+        .from('.dropdown-menu', { visibility: 'hidden' })
+        .to('.dropdown-menu', { visibility: 'visible' });
+    }
+  }, [isComponentVisible, menuOpen]);
 
   useEffect(() => {
     MenuTimeline.current?.reversed(!menuOpen);
@@ -32,24 +75,30 @@ export function Dropdown() {
 
   return (
     <Container>
-      <DropdownButton onClick={() => setIsMenuOpen(!menuOpen)}>
-        <ButtonContainer>
+      <DropdownButton
+        onClick={() => {
+          setIsMenuOpen(!menuOpen);
+          dispatch(setTrue());
+        }}
+      >
+        <ButtonContainer ref={ref}>
           <Header>For Employers</Header>
           <Image src="/dropdown.svg" alt="dropdown" width="9" height="7" />
         </ButtonContainer>
       </DropdownButton>
-
-      <DropdownMenu className="dropdown-menu" ref={DropbownMenu}>
-        <ul>
-          {ItemsLoggedOut.map((item) => (
-            <ListItem key={uuid()}>
-              <LinkItem href={item.link} passHref>
-                <Text>{item.name}</Text>
-              </LinkItem>
-            </ListItem>
-          ))}
-        </ul>
-      </DropdownMenu>
+      {isComponentVisible ? (
+        <DropdownMenu className="dropdown-menu">
+          <ul>
+            {ItemsLoggedOut.map((item) => (
+              <ListItem key={uuid()}>
+                <LinkItem href={item.link} passHref>
+                  <Text>{item.name}</Text>
+                </LinkItem>
+              </ListItem>
+            ))}
+          </ul>
+        </DropdownMenu>
+      ) : null}
     </Container>
   );
 }
