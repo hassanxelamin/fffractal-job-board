@@ -31,6 +31,7 @@
     "react-dom": "18.2.0",
     "react-redux": "^8.0.5",
     "react-uuid": "^2.0.0",
+    "require-from-string": "^2.0.2",
     "storybook-addon-next": "^1.6.10",
     "storybook-addon-next-router": "^4.0.1",
     "styled-components": "^5.3.6",
@@ -75,8 +76,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "resolutions": {
-    "enhanced-resolve": "5.10.0"
   }
 }
