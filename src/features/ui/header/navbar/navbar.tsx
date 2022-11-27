@@ -1,10 +1,11 @@
 import React from 'react';
-import { ButtonGradient, LogoGrouped, Dropdown } from '@features/ui';
 import { device } from '@utils/css-mixins';
 import styled from 'styled-components';
+import { ButtonGradient } from '../button/button';
+import { LogoGrouped } from '../logo';
+import { Dropdown } from '../dropdown/dropdown';
 
 export const NavBar = () => {
-
   return (
     <Container>
       <LogoGrouped />
@@ -14,7 +15,7 @@ export const NavBar = () => {
       </Menus>
     </Container>
   );
-};
+}
 
 const Container = styled.div`
   height: 120px;

@@ -35,7 +35,7 @@ export function Dropdown() {
     return () => {
       document.removeEventListener('click', handleClickOutside, true);
     };
-  }, []);
+  });
 
   // const setVisibility = (initState: boolean) => {
   //   setIsComponentVisible(initState);

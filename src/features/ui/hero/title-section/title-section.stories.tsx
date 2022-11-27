@@ -12,7 +12,7 @@ export default {
 } as ComponentMeta<typeof TitleSection>;
 
 // Base Template
-const Template: ComponentStory<typeof TitleSection> = (args) => (
+const Template: ComponentStory<typeof TitleSection> = (args: any) => (
   <TitleSection {...args} />
 );
 

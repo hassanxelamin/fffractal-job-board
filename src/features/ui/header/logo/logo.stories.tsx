@@ -12,7 +12,9 @@ export default {
 } as ComponentMeta<typeof LogoGrouped>;
 
 // Base Template
-const Template: ComponentStory<typeof LogoGrouped> = (args) => (<LogoGrouped {...args} />);
+const Template: ComponentStory<typeof LogoGrouped> = (args: any) => (
+  <LogoGrouped {...args} />
+);
 
 // Story, a component variation consisting of a template + args
 export const Default = Template.bind({});

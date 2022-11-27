@@ -2,7 +2,7 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { NavBar, TitleSection } from '@features/ui';
+import { NavBar } from '@features/ui';
 
 const Home: NextPage = () => {
   return (
@@ -16,7 +16,6 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavBar />
-      {/* <TitleSection /> */}
     </div>
   );
 };

@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
-export default function useComponentVisible(initialIsVisible) {
-  const [isComponentVisible, setIsComponentVisible] = useState(initialIsVisible);
+export default function useComponentVisible(initialIsVisible: boolean) {
+  const [isComponentVisible, setIsComponentVisible] =
+    useState(initialIsVisible);
   const ref = useRef<any>(null);
 
   const handleClickOutside = (ev: { target: any }) => {
