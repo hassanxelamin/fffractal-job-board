@@ -2,7 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import { useField } from 'formik';
 
-export function Input({ ...props }) {
+interface Props {
+  name: string;
+  type: string;
+  placeholder: string;
+  spellCheck: boolean;
+  disabled: boolean;
+}
+
+export function Input({ ...props }: Props) {
   const [field] = useField(props);
   return (
     <Container>
@@ -19,10 +27,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 0.25rem;
-`;
-
-const Label = styled.label`
-  color: rgb(75 85 99);
 `;
 
 const InputContainer = styled.div`

@@ -9,6 +9,14 @@ import { Formik, Form } from 'formik';
 import { signIn } from 'next-auth/react';
 import { Input } from './input';
 
+interface EmailProps {
+  email: string;
+}
+
+interface AuthProps {
+  toggleModal: () => void;
+}
+
 const SignInSchema = Yup.object().shape({
   email: Yup.string()
     .trim()
@@ -16,7 +24,7 @@ const SignInSchema = Yup.object().shape({
     .required('This field is required'),
 });
 
-const Confirm = ({ email = '' }) => (
+const Confirm = ({ email = '' }: EmailProps) => (
   <ConfirmedEmail>
     <div>We emailed a magic link to</div>
     <EmailHighlight>
@@ -28,19 +36,17 @@ const Confirm = ({ email = '' }) => (
   </ConfirmedEmail>
 );
 
-export const AuthModal = ({ visible, toggleModal }) => {
-  if (visible) return null;
-
+export const AuthModal = ({ toggleModal }: AuthProps) => {
   const [showConfirm, setConfirm] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
-  const signInWithEmail = async ({ email }) => {
+  const signInWithEmail = async ({ email }: EmailProps) => {
     let toastId;
     try {
       toastId = toast.loading('Loading...');
       setDisabled(true);
       // Perform sign in
-      const { error } = await signIn('email', {
+      const { error }: any = await signIn('email', {
         redirect: false,
         callbackUrl: window.location.href,
         email,
@@ -82,7 +88,7 @@ export const AuthModal = ({ visible, toggleModal }) => {
             validateOnBlur={false}
             onSubmit={signInWithEmail}
           >
-            {({ isSubmitting, values }) => (
+            {({ isSubmitting }) => (
               <Forms>
                 <FormInput>
                   <Input

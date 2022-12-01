@@ -9,7 +9,7 @@ import { device } from '@utils/css-mixins';
 /*
  * Components
  */
-import { AuthModal } from '@features/login';
+import { Modal } from '@features/login';
 import { LogoGrouped, Dropdown, ButtonGradient } from '@features/ui';
 
 export const NavBar = () => {
@@ -26,7 +26,7 @@ export const NavBar = () => {
         <Dropdown toggleModal={toggleModal} />
         <ButtonGradient text="Post a Job!" />
       </Menus>
-      <AuthModal toggleModal={toggleModal} visible={isModalOpen} />
+      <Modal toggleModal={toggleModal} visible={isModalOpen} />
     </Container>
   );
 };
