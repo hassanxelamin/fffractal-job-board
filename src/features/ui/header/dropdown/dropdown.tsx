@@ -1,102 +1,93 @@
+/* eslint-disable no-console */
 /* eslint-disable react/button-has-type */
-import React, { useRef, useEffect, useState } from 'react';
-import styled from 'styled-components';
-import Image from 'next/image';
+import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { useSession, signOut } from 'next-auth/react';
+import { ButtonStyle } from '@utils/css-mixins';
+
+/*
+ * Styles
+ */
+import styled from 'styled-components';
+
+/*
+ * Utils
+ */
 import uuid from 'react-uuid';
-import gsap from 'gsap';
-import { useSelector, useDispatch } from 'react-redux';
-import ItemsLoggedOut from './items';
-import type { RootState } from '../../../../redux/store';
-import { setTrue, setFalse } from '../../../../redux/slices/outside-click';
+import { ItemsLoggedOut, ItemsLoggedIn } from './items';
 
-export function Dropdown() {
-  const [menuOpen, setIsMenuOpen] = useState(false);
-  // const { ref, isComponentVisible } = useComponentVisible(true);
-  // const DropbownButton = useRef<HTMLButtonElement>(null);
-  // const DropbownMenu = useRef<HTMLDivElement>(null);
+export function Dropdown({ toggleModal }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { data: session } = useSession();
+  const user = session?.user;
 
-  const isComponentVisible = useSelector(
-    (state: RootState) => state.closer.value
-  );
-
-  const dispatch = useDispatch();
-
-  const ref = useRef<any>(null);
-
-  const handleClickOutside = (ev: { target: any }) => {
-    if (ref.current && !ref.current.contains(ev.target)) {
-      dispatch(setFalse());
-    }
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
-
-  useEffect(() => {
-    document.addEventListener('click', handleClickOutside, true);
-    return () => {
-      document.removeEventListener('click', handleClickOutside, true);
-    };
-  });
-
-  // const setVisibility = (initState: boolean) => {
-  //   setIsComponentVisible(initState);
-  // };
-
-  // -------- GSAP -----------
-
-  const MenuTimeline = useRef<gsap.core.Timeline>();
-
-  useEffect(() => {
-    if (isComponentVisible === false && menuOpen === true) {
-      MenuTimeline.current = gsap
-        .timeline({
-          defaults: {
-            duration: 0.1,
-            ease: 'power2.out',
-          },
-        })
-        .to('.dropdown-menu', { visibility: 'visible' });
-      // .to('.dropdown-menu', { visibility: 'visible' });
-    } else {
-      MenuTimeline.current = gsap
-        .timeline({
-          defaults: {
-            duration: 0.1,
-            ease: 'power2.out',
-          },
-        })
-        .from('.dropdown-menu', { visibility: 'hidden' })
-        .to('.dropdown-menu', { visibility: 'visible' });
-    }
-  }, [isComponentVisible, menuOpen]);
-
-  useEffect(() => {
-    MenuTimeline.current?.reversed(!menuOpen);
-  }, [menuOpen]);
 
   return (
     <Container>
       <DropdownButton
         onClick={() => {
-          setIsMenuOpen(!menuOpen);
-          dispatch(setTrue());
+          toggleMenu();
         }}
       >
-        <ButtonContainer ref={ref}>
-          <Header>For Employers</Header>
+        <ButtonContainer>
+          {!user ? (
+            <Header>For Employers</Header>
+          ) : (
+            <Header>My Account</Header>
+          )}
           <Image src="/dropdown.svg" alt="dropdown" width="9" height="7" />
         </ButtonContainer>
       </DropdownButton>
-      {isComponentVisible ? (
+
+      {isMenuOpen ? (
         <DropdownMenu className="dropdown-menu">
-          <ul>
-            {ItemsLoggedOut.map((item) => (
-              <ListItem key={uuid()}>
-                <LinkItem href={item.link} passHref>
-                  <Text>{item.name}</Text>
-                </LinkItem>
-              </ListItem>
-            ))}
-          </ul>
+          {!user ? (
+            <ul>
+              {ItemsLoggedOut.map((item) => (
+                <ListItem key={uuid()}>
+                  {item.name === 'Sign in' ? (
+                    <Item
+                      onClick={() => {
+                        toggleMenu();
+                        toggleModal();
+                      }}
+                    >
+                      <Text>{item.name}</Text>
+                    </Item>
+                  ) : (
+                    <LinkItem href={item.link} passHref>
+                      <Text>{item.name}</Text>
+                    </LinkItem>
+                  )}
+                </ListItem>
+              ))}
+            </ul>
+          ) : (
+            <ul>
+              {ItemsLoggedIn.map((item) => (
+                <ListItem key={uuid()}>
+                  {item.name === 'Sign Out' ? (
+                    <Item
+                      onClick={() => {
+                        toggleMenu();
+                        signOut();
+                      }}
+                    >
+                      <Text>{item.name}</Text>
+                    </Item>
+                  ) : (
+                    <LinkItem href={item.link} passHref>
+                      <Text>{item.name}</Text>
+                    </LinkItem>
+                  )}
+                </ListItem>
+              ))}
+            </ul>
+          )}
         </DropdownMenu>
       ) : null}
     </Container>
@@ -111,11 +102,18 @@ const Container = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
+  ${ButtonStyle};
+  width: 123px;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
 `;
 
 const DropdownMenu = styled.div`
   position: absolute;
-  top: 30px;
+  top: 50px;
+  left: 10px;
   width: 123px;
   border-radius: 10px;
   box-shadow: 0px 24px 48px 0 rgba(0, 0, 0, 0.16);
@@ -124,8 +122,6 @@ const DropdownMenu = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  visibility: hidden;
 `;
 
 const DropdownButton = styled.button`
@@ -140,6 +136,14 @@ const LinkItem = styled(Link)`
   height: 100%;
   display: flex;
   align-items: center;
+`;
+
+const Item = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 `;
 
 const ListItem = styled.div`

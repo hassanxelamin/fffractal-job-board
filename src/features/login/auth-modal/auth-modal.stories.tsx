@@ -9,17 +9,21 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 /*
  * Components
  */
-import { LogoGrouped } from '@features/ui/header/logo';
+import { AuthModal } from './auth-modal';
 
 // Metadata of our component
 export default {
-  title: 'Components/Logo',
-  component: LogoGrouped,
-} as ComponentMeta<typeof LogoGrouped>;
+  title: 'Components/AuthModal',
+  component: AuthModal,
+  args: { text: 'Post a Job!' },
+  argTypes: {
+    onClick: { action: true },
+  },
+} as ComponentMeta<typeof AuthModal>;
 
 // Base Template
-const Template: ComponentStory<typeof LogoGrouped> = (args: any) => (
-  <LogoGrouped {...args} />
+const Template: ComponentStory<typeof AuthModal> = (args: any) => (
+  <AuthModal {...args} />
 );
 
 // Story, a component variation consisting of a template + args

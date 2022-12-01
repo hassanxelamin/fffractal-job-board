@@ -1,8 +1,14 @@
-import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
+import React from 'react';
+
+/*
+ * Storybook
+ */
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-// import { within } from '@storybook/testing-library';
-// import { expect } from '@storybook/jest';
+
+/*
+ * Components
+ */
 import { Dropdown } from './dropdown';
 
 // Metadata of our component
@@ -18,8 +24,3 @@ const Template: ComponentStory<typeof Dropdown> = (args: any) => (
 
 // Story, a component variation consisting of a template + args
 export const Default = Template.bind({});
-// Default.play = ({ canvasElement }) => {
-//   const canvas = within(canvasElement);
-//   const button = canvas.getByRole('link');
-//   expect(button).toHaveAttribute('href', '/job-post');
-// };

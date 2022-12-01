@@ -1,8 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
 import Link from 'next/link';
+
+/*
+ * Styles
+ */
+import styled from 'styled-components';
 import { ButtonStyle, Gradient } from '@utils/css-mixins';
 
+/*
+ * Types
+ */
 type ButtonProps = {
   text: string;
 };

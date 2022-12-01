@@ -1,18 +1,35 @@
 import React from 'react';
 import type { AppProps } from 'next/app';
-import { Provider } from 'react-redux';
+import { Toaster } from 'react-hot-toast';
 
 /*
  * Styles
  */
 import { GlobalStyles } from '@utils/css-mixins';
-import { store } from '../redux/store';
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+/*
+ * Utils
+ */
+import { SessionProvider as AuthProvider } from 'next-auth/react';
+
+/*
+ * Global Components
+ */
+import { NavBar } from '@features/ui';
+
+export default function MyApp({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) {
   return (
-    <Provider store={store}>
-      <GlobalStyles />
-      <Component {...pageProps} />
-    </Provider>
+    <>
+      <AuthProvider session={session}>
+        <GlobalStyles />
+        <NavBar />
+        <Component {...pageProps} />
+      </AuthProvider>
+
+      <Toaster />
+    </>
   );
 }

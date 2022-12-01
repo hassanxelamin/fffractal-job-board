@@ -1,15 +1,26 @@
 // @ts-nocheck
 import React from 'react';
+
+/*
+ * React Test Library
+ */
 import { render, screen, fireEvent } from '@testing-library/react';
-import { RouterContext } from 'next/dist/shared/lib/router-context';
-import { createMockRouter } from '../../../../utils/test-utils/createMockRouter';
 import '@testing-library/jest-dom';
 
+/*
+ * Mock Utils
+ */
+import { RouterContext } from 'next/dist/shared/lib/router-context';
+import { MockRouter } from '@utils/test-utils';
+
+/*
+ * Components
+ */
 import { LogoGrouped } from './components/logo-grouped';
 
 it('has an anchor tag with href="/job-post"', () => {
   render(
-    <RouterContext.Provider value={createMockRouter}>
+    <RouterContext.Provider value={MockRouter}>
       <LogoGrouped />
     </RouterContext.Provider>
   );
@@ -19,7 +30,7 @@ it('has an anchor tag with href="/job-post"', () => {
 
 describe('when button is clicked', () => {
   it('calls router.push with "/"', () => {
-    const router = createMockRouter();
+    const router = MockRouter();
 
     render(
       <RouterContext.Provider value={router}>
@@ -33,7 +44,7 @@ describe('when button is clicked', () => {
   });
 
   it('calls router.push with "/"', () => {
-    const router = createMockRouter();
+    const router = MockRouter();
 
     render(
       <RouterContext.Provider value={router}>

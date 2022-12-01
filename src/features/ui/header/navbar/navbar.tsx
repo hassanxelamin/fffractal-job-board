@@ -1,18 +1,33 @@
-import React from 'react';
-import { device } from '@utils/css-mixins';
+/* eslint-disable no-console */
+import React, { useState } from 'react';
+
+/*
+ * Styles
+ */
 import styled from 'styled-components';
-import { ButtonGradient } from '../button/button';
-import { LogoGrouped } from '../logo';
-import { Dropdown } from '../dropdown/dropdown';
+import { device } from '@utils/css-mixins';
+
+/*
+ * Components
+ */
+import { AuthModal } from '@features/login';
+import { LogoGrouped, Dropdown, ButtonGradient } from '@features/ui';
 
 export const NavBar = () => {
+  const [isModalOpen, setModalOpen] = useState(true);
+
+  const toggleModal = () => {
+    setModalOpen(!isModalOpen);
+  };
+
   return (
     <Container>
       <LogoGrouped />
       <Menus>
-        <Dropdown />
+        <Dropdown toggleModal={toggleModal} />
         <ButtonGradient text="Post a Job!" />
       </Menus>
+      <AuthModal toggleModal={toggleModal} visible={isModalOpen} />
     </Container>
   );
 };
