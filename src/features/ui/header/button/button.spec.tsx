@@ -1,16 +1,26 @@
 // @ts-nocheck
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
 
-import { RouterContext } from 'next/dist/shared/lib/router-context';
-import { createMockRouter } from '../../../../utils/test-utils/createMockRouter';
+/*
+ * React Test Library
+ */
+import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
+/*
+ * Mock Utils
+ */
+import { RouterContext } from 'next/dist/shared/lib/router-context';
+import { MockRouter } from '@utils/test-utils';
+
+/*
+ * Components
+ */
 import { ButtonGradient } from './button';
 
 it('has an anchor tag with href="/job-post"', () => {
   render(
-    <RouterContext.Provider value={createMockRouter}>
+    <RouterContext.Provider value={MockRouter}>
       <ButtonGradient text="Post a Job" />
     </RouterContext.Provider>
   );
@@ -19,7 +29,7 @@ it('has an anchor tag with href="/job-post"', () => {
 
 describe('when button is clicked', () => {
   it('calls router.push with "/job-post"', () => {
-    const router = createMockRouter();
+    const router = MockRouter();
 
     render(
       <RouterContext.Provider value={router}>

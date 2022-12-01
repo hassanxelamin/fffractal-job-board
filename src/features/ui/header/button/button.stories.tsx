@@ -1,8 +1,20 @@
-import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
+import React from 'react';
+
+/*
+ * Storybook
+ */
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+
+/*
+ * React Test Library
+ */
 import { within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
+
+/*
+ * Components
+ */
 import { ButtonGradient } from './button';
 
 // Metadata of our component

@@ -1,6 +1,14 @@
 import React from 'react';
+
+/*
+ * Styles
+ */
 import styled from 'styled-components';
 import { device } from '@utils/css-mixins';
+
+/*
+ * Components
+ */
 import { LogoName } from './logo-name';
 import { LogoImage } from './logo-image';
 
@@ -9,7 +17,7 @@ export function LogoGrouped() {
     <Container>
       <LogoImage />
       <Divider />
-      <LogoName />
+      <LogoName name="FFFRACTAL" />
     </Container>
   );
 }

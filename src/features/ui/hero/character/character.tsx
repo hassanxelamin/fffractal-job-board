@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export function TitleSection() {
+export function Character() {
   return <Title>3D Placeholder</Title>;
 }
 

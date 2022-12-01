@@ -1,6 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
 import Link from 'next/link';
+
+/*
+ * Styles
+ */
+import styled from 'styled-components';
 import {
   device,
   LogoFont,
@@ -8,10 +12,14 @@ import {
   GradientTextWrap,
 } from '@utils/css-mixins';
 
-export function LogoName() {
+interface Props {
+  name: string;
+}
+
+export function LogoName({ name }: Props) {
   return (
     <Link href="/" passHref data-testid="name-link">
-      <Name>FFFRACTAL</Name>
+      <Name>{name}</Name>
     </Link>
   );
 }
