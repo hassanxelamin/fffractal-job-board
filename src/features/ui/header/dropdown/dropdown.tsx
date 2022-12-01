@@ -3,22 +3,30 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useSession, signOut } from 'next-auth/react';
-import { ButtonStyle } from '@utils/css-mixins';
 
 /*
  * Styles
  */
 import styled from 'styled-components';
+import { ButtonStyle } from '@utils/css-mixins';
 
 /*
  * Utils
  */
 import uuid from 'react-uuid';
+import { useSession, signOut } from 'next-auth/react';
 import { ItemsLoggedOut, ItemsLoggedIn } from './items';
 
-export function Dropdown({ toggleModal }) {
+/*
+ * Types
+ */
+interface Props {
+  toggleModal: () => void;
+}
+
+export function Dropdown({ toggleModal }: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const { data: session } = useSession();
   const user = session?.user;
 
@@ -32,13 +40,10 @@ export function Dropdown({ toggleModal }) {
         onClick={() => {
           toggleMenu();
         }}
+        title="job-post"
       >
         <ButtonContainer>
-          {!user ? (
-            <Header>For Employers</Header>
-          ) : (
-            <Header>My Account</Header>
-          )}
+          {!user ? <Header>For Employers</Header> : <Header>My Account</Header>}
           <Image src="/dropdown.svg" alt="dropdown" width="9" height="7" />
         </ButtonContainer>
       </DropdownButton>
@@ -59,7 +64,7 @@ export function Dropdown({ toggleModal }) {
                       <Text>{item.name}</Text>
                     </Item>
                   ) : (
-                    <LinkItem href={item.link} passHref>
+                    <LinkItem href={`/${item.link}`} title={item.link} passHref>
                       <Text>{item.name}</Text>
                     </LinkItem>
                   )}
@@ -80,7 +85,7 @@ export function Dropdown({ toggleModal }) {
                       <Text>{item.name}</Text>
                     </Item>
                   ) : (
-                    <LinkItem href={item.link} passHref>
+                    <LinkItem href={item.link} title={item.link} passHref>
                       <Text>{item.name}</Text>
                     </LinkItem>
                   )}

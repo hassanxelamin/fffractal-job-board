@@ -19,8 +19,12 @@ const SignInSchema = Yup.object().shape({
 const Confirm = ({ email = '' }) => (
   <ConfirmedEmail>
     <div>We emailed a magic link to</div>
-    <EmailHighlight><strong>{email ?? ''}</strong>.</EmailHighlight>
-    <div>Check your inbox and click the link in the email to login or sign up.</div>
+    <EmailHighlight>
+      <strong>{email ?? ''}</strong>.
+    </EmailHighlight>
+    <div>
+      Check your inbox and click the link in the email to login or sign up.
+    </div>
   </ConfirmedEmail>
 );
 
@@ -104,9 +108,7 @@ export const AuthModal = ({ visible, toggleModal }) => {
             validateOnBlur={false}
             onSubmit={signInWithEmail}
           >
-            {({ values }) => (
-              <Confirm email={values?.email ?? ''} />
-            )}
+            {({ values }) => <Confirm email={values?.email ?? ''} />}
           </Formik>
         )}
       </ModalContainer>

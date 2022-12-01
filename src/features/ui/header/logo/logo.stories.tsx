@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import React from 'react';
 
 /*
@@ -18,9 +17,7 @@ export default {
 } as ComponentMeta<typeof LogoGrouped>;
 
 // Base Template
-const Template: ComponentStory<typeof LogoGrouped> = (args: any) => (
-  <LogoGrouped {...args} />
-);
+const Template: ComponentStory<typeof LogoGrouped> = () => <LogoGrouped />;
 
 // Story, a component variation consisting of a template + args
 export const Default = Template.bind({});

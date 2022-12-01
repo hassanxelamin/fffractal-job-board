@@ -10,7 +10,7 @@ import { GlobalStyles } from '@utils/css-mixins';
 /*
  * Utils
  */
-import { SessionProvider as AuthProvider } from 'next-auth/react';
+import { SessionProvider } from 'next-auth/react';
 
 /*
  * Global Components
@@ -22,14 +22,11 @@ export default function MyApp({
   pageProps: { session, ...pageProps },
 }: AppProps) {
   return (
-    <>
-      <AuthProvider session={session}>
-        <GlobalStyles />
-        <NavBar />
-        <Component {...pageProps} />
-      </AuthProvider>
-
+    <SessionProvider session={session}>
+      <GlobalStyles />
+      <NavBar />
+      <Component {...pageProps} />
       <Toaster />
-    </>
+    </SessionProvider>
   );
 }
