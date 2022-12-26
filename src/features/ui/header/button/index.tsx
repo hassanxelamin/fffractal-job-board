@@ -1,1 +1,0 @@
-export { ButtonGradient } from './button';

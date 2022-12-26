@@ -20,8 +20,12 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@utils/*": ["src/utils/*"],
-      "@features/*": ["src/features/*"],
+      "@utils/*": [
+        "src/helpers/*"
+      ],
+      "@features/*": [
+        "src/components/*"
+      ]
     },
     "plugins": [
       {
@@ -31,11 +35,12 @@
   },
   "include": [
     "next-env.d.ts",
-    "*/src/*.ts",
-    "*/src/*.tsx",
+    "**/src/*.ts",
+    "**/src/*.tsx",
     "eslintrc.json",
     "src",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "src/components/logo/logo-svg.tsx"
   ],
   "exclude": [
     "node_modules"

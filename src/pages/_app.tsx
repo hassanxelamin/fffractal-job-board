@@ -1,21 +1,9 @@
 import React from 'react';
 import type { AppProps } from 'next/app';
 import { Toaster } from 'react-hot-toast';
-
-/*
- * Styles
- */
-import { GlobalStyles } from '@utils/css-mixins';
-
-/*
- * Utils
- */
+import '../styles/globals.css';
 import { SessionProvider } from 'next-auth/react';
-
-/*
- * Global Components
- */
-import { NavBar } from '@features/ui';
+import { NavBar } from 'src/components';
 
 export default function MyApp({
   Component,
@@ -23,7 +11,6 @@ export default function MyApp({
 }: AppProps) {
   return (
     <SessionProvider session={session}>
-      <GlobalStyles />
       <NavBar />
       <Component {...pageProps} />
       <Toaster />

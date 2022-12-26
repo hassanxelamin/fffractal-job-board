@@ -13,7 +13,7 @@ import { PrismaClient } from '@prisma/client';
 // Instantiate Prisma Client
 const prisma = new PrismaClient();
 
-export default NextAuth({
+export const authOptions = {
   pages: {
     signIn: '/',
     signOut: '/',
@@ -36,4 +36,6 @@ export default NextAuth({
     }),
   ],
   adapter: PrismaAdapter(prisma),
-});
+};
+
+export default NextAuth(authOptions);

@@ -2,8 +2,12 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { PrismaClient } from '@prisma/client';
+import { EmailForm, SearchBar, Jobs } from 'src/components';
 
-const Home: NextPage = () => {
+const prisma = new PrismaClient();
+
+const Home: NextPage = ({ posts = [] }) => {
   return (
     <div>
       <Head>
@@ -14,8 +18,24 @@ const Home: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <div>
+        <EmailForm />
+        {/* <TitleSection /> */}
+        <SearchBar />
+        <Jobs jobs={posts} />
+      </div>
     </div>
   );
 };
 
 export default Home;
+
+export async function getServerSideProps() {
+  const posts = await prisma.post.findMany();
+
+  return {
+    props: {
+      posts: JSON.parse(JSON.stringify(posts)),
+    },
+  };
+}

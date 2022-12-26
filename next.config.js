@@ -4,6 +4,9 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  images: {
+    domains: ['rqtryxzgjgullcvniyvy.supabase.co'],
+  },
   swcMinify: true,
   optimizeFonts: false,
 }
