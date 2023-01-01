@@ -5,6 +5,6 @@ export const ItemsLoggedOut = [
 
 export const ItemsLoggedIn = [
   { link: 'job-post', name: 'Post a Job' },
-  { link: 'my-jobs', name: 'My Jobs' },
+  { link: 'jobs', name: 'My Jobs' },
   { link: 'sign-out', name: 'Sign Out' },
 ];

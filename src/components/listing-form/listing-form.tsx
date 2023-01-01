@@ -2,23 +2,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-hot-toast';
-import { Tiptap } from 'src/components';
-import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import { TrixEditor } from 'react-trix';
-// import { EditorContent, useEditor } from '@tiptap/react';
-// import StarterKit from '@tiptap/starter-kit';
-
-const ListingSchema = Yup.object().shape({
-  company: Yup.string().trim().required(),
-  website: Yup.string().trim().required(),
-  title: Yup.string().trim().required(),
-  commitment: Yup.string().trim().required(),
-  location: Yup.string().trim().required(),
-  remote: Yup.boolean().required(),
-  urlOrEmail: Yup.string().trim().required(),
-  description: Yup.string().trim().required(),
-});
 
 interface FormValues {
   company: string;
@@ -34,12 +18,13 @@ interface FormValues {
 interface MyFormProps {
   redirectPath: string;
   onSubmit: (data: any) => {};
+  userId: string;
 }
 
 export const ListingForm = (props: MyFormProps) => {
   const router = useRouter();
 
-  const { redirectPath, onSubmit } = props;
+  const { redirectPath, onSubmit, userId } = props;
 
   const formik = useFormik<FormValues>({
     initialValues: {
@@ -53,13 +38,12 @@ export const ListingForm = (props: MyFormProps) => {
       description: '',
     },
     async onSubmit(values: FormValues) {
-      console.log(values);
       let toastId;
       try {
         toastId = toast.loading('Submitting...');
         // Submit data
         if (typeof onSubmit === 'function') {
-          await onSubmit({ ...values });
+          await onSubmit({ variables: { ...values, userId }});
         }
         toast.success('Successfully submitted', { id: toastId });
         // Redirect user
@@ -71,43 +55,6 @@ export const ListingForm = (props: MyFormProps) => {
       }
     },
   });
-
-  // const editor = useEditor({
-  //   extensions: [StarterKit],
-  //   editorProps: {
-  //     attributes: {
-  //       class: 'border-solid border-[3px] width-[800px] h-[330px]',
-  //     },
-  //   },
-  //   onUpdate: ({ editor }) => {
-  //     const json = editor.getText();
-  //     // console.log(json);
-  //     formik.values.urlOrEmail = json;
-  //     // send the content to an API here
-  //   },
-  //   content: `
-  //     <h2>
-  //       Hi there,
-  //     </h2>
-  //   `,
-  // });
-
-  let mergeTags = [
-    {
-      trigger: "@",
-      tags: [
-        { name: "Dominic St-Pierre", tag: "@dominic" },
-        { name: "John Doe", tag: "@john" }
-      ]
-    },
-    {
-      trigger: "{",
-      tags: [
-        { name: "First name", tag: "{{ .FirstName }}" },
-        { name: "Last name", tag: "{{ .LastName }}" }
-      ]
-    }
-  ];
 
   return (
     <div className="font-satoshi flex items-center justify-center w-full text-black">
@@ -253,17 +200,6 @@ export const ListingForm = (props: MyFormProps) => {
             <div>
               <label htmlFor="description">
                 Job Description
-                {/* <EditorContent
-                  editor={editor}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.description}
-                /> */}
-                <TrixEditor
-                  mergeTags={mergeTags}
-                  placeholder="editor's placeholder"
-                  value="initial content <strong>for the editor</strong>"
-                />
               </label>
             </div>
           </div>

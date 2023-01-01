@@ -2,19 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { ListingForm } from 'src/components';
-import { gql, useQuery, useMutation } from '@apollo/client';
-import { getAuthSession } from '../helpers/auth/get-server-session';
+import { useRouter } from 'next/router';
+import { gql, useMutation } from '@apollo/client';
+import { getAuthSession } from '../../helpers/auth/get-server-session';
 
-const getUniqueUser = gql`
-  query GetUniqueUser($email: String!) {
-    getUsers(email: $email) {
-      id
-    }
-  }
-`;
-
-const createPosts = gql`
-  mutation CreatePosts(
+const updatePosts = gql`
+  mutation UpdatePost(
     $company: String
     $website: String
     $title: String
@@ -25,7 +18,7 @@ const createPosts = gql`
     $description: String
     $userId: String
   ) {
-    createPosts(
+    updatePost(
       company: $company
       website: $website
       title: $title
@@ -36,44 +29,29 @@ const createPosts = gql`
       description: $description
       userId: $userId
     ) {
-      company
-      website
-      title
       commitment
-      location
+      company
       description
+      id
+      location
       remote
+      title
       urlOrEmail
-      userId
+      website
     }
   }
 `;
 
-// ADD TYPES FOR DATA //
+const EditPost = () => {
+  const router = useRouter();
 
-const JobPost = ({ sessionEmail }) => {
-  // const [user, setUser] = use
-  const [addPost] = useMutation(createPosts);
+  const { id } = router.query;
 
-  const { data, loading } = useQuery(getUniqueUser, {
-    variables: { email: sessionEmail },
-  });
+  const [updatePost] = useMutation(updatePosts);
 
-  if (loading) {
-    return (
-      <div>
-        <ListingForm redirectPath="/" onSubmit={addPost} />
-      </div>
-    );
-  }
-  
   return (
     <div>
-      <ListingForm
-        redirectPath="/"
-        onSubmit={addPost}
-        userId={data.getUsers[0].id}
-      />
+      <ListingForm redirectPath="/" onSubmit={updatePost} userId={`${id}`} />
     </div>
   );
 };
@@ -96,4 +74,4 @@ export const getServerSideProps: GetServerSideProps = async (
   };
 };
 
-export default JobPost;
+export default EditPost;

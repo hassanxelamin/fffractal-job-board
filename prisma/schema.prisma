@@ -5,10 +5,13 @@ generator client {
   provider = "prisma-client-js"
 }
 
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  relationMode = "prisma"
 }
+
 
 model Account {
   id                 String  @id @default(cuid())
@@ -31,6 +34,7 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
+
 model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique
@@ -38,6 +42,7 @@ model Session {
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+
 
 model User {
   id            String     @id @default(cuid())
@@ -49,6 +54,7 @@ model User {
   sessions      Session[]
   posts         Post[]
 }
+
 
 model VerificationToken {
   identifier String
@@ -71,6 +77,6 @@ model Post {
   remote        Boolean
   urlOrEmail    String
   description   String
+  authorId      String?      
   author        User?        @relation(fields: [authorId], references: [id])
-  authorId      String?
 }

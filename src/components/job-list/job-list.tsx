@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import uuid from 'react-uuid';
 import axios from 'axios';
-import useSWR from 'swr';
+import { gql, useQuery, useLazyQuery } from '@apollo/client';
 
 interface FormValues {
   company: string;
@@ -14,17 +14,29 @@ interface FormValues {
   description: string;
 }
 
-export function JobList({ jobs, setNewData }) {
-  const [data, setData] = useState({});
-
-  const getSingle = async (id) => {
-    try {
-      const res = await axios.post('/api/details', { data: { id } });
-      setData(res.data);
-    } catch (error) {
-      console.log(error.response.data.error);
+const getUniqueUserPosts = gql`
+  query GetSinglePost($postId: String) {
+    getSinglePost(postId: $postId) {
+      id
+      company
+      website
+      title
+      commitment
+      location
+      remote
+      urlOrEmail
+      description
+      userId
     }
-  };
+  }
+`;
+
+export function JobList({ jobs, fetchMore, endCursor, hasNextPage, hasPreviousPage, startCursor }) {
+  const [getSingle, { data }] = useLazyQuery(getUniqueUserPosts);
+
+  if (data) {
+    console.log(data.getSinglePost[0].company);
+  }
 
   return (
     <div
@@ -40,7 +52,7 @@ export function JobList({ jobs, setNewData }) {
                 key={uuid()}
                 className="h-[113px] border-b-[3px] border-solid border-black hover:opacity-50 cursor-pointer"
                 onClick={() => {
-                  getSingle(id);
+                  getSingle({ variables: { postId: id } });
                 }}
               >
                 <tr className="relative h-full">
@@ -49,10 +61,10 @@ export function JobList({ jobs, setNewData }) {
                       <div className="absolute top-[21px] left-[12px] w-[46px] h-[46px] border-[1px] border-solid border-black rounded-[5px]" />
                       <div>
                         <h2 className="absolute top-[1.7rem] left-[7.4rem] text-[1.6rem] font-semibold">
-                          {job.title}
+                          {job.node.title}
                         </h2>
                         <h3 className="absolute top-[45px] left-[74px] text-[16px]">
-                          {job.company}
+                          {job.node.company}
                         </h3>
                         <p className="absolute top-[79px] left-[74px] text-[16px] text-[#6A6A6A]">
                           $180k - 250k
@@ -63,7 +75,7 @@ export function JobList({ jobs, setNewData }) {
 
                   <td>
                     <p className="absolute top-[17px] right-[16px] text-[16px]">
-                      {job.location}
+                      {job.node.location}
                     </p>
                   </td>
 
@@ -78,10 +90,49 @@ export function JobList({ jobs, setNewData }) {
               </tbody>
             );
           })}
+        {hasNextPage ? (
+          <button
+            onClick={() => {
+              fetchMore({
+                variables: { after: endCursor },
+                updateQuery: (prevResult,{ fetchMoreResult }) => {
+                  if (!fetchMoreResult) return prevResult
+                  fetchMoreResult.getPosts.edges = [
+                    ...fetchMoreResult.getPosts.edges,
+                  ];
+                  return fetchMoreResult;
+                },
+              });
+            }}
+          >
+            forward
+          </button>
+        ) : (
+          <button
+          onClick={() => {
+            fetchMore({
+              variables: { first: undefined, after: undefined, last: -6, before: startCursor },
+              updateQuery: (prevResult,{ fetchMoreResult }) => {
+                if (!fetchMoreResult) return prevResult
+                fetchMoreResult.getPosts.edges = [
+                  ...fetchMoreResult.getPosts.edges,
+                ];
+                return fetchMoreResult;
+              },
+            });
+          }}
+        >
+          back
+        </button>
+        )}
       </table>
-      <div className="bg-[#deb887] w-full">
-        <h1>{data.company}</h1>
-      </div>
+      {data ? (
+        <div className="bg-[#deb887] w-full">
+          <h1>{data.getSinglePost[0].company}</h1>
+        </div>
+      ) : (
+        <div className="bg-[#deb887] w-full" />
+      )}
     </div>
   );
 }
