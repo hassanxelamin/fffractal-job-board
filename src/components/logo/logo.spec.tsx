@@ -16,7 +16,7 @@ import { MockRouter } from 'src/helpers/test-utils';
 /*
  * Components
  */
-import { LogoGrouped } from './components/logo-grouped';
+import { Logo } from './logo';
 
 /*
  * Tests if link has href in anchor tag with the right path
@@ -24,7 +24,7 @@ import { LogoGrouped } from './components/logo-grouped';
 it('has an anchor tag with href="/"', () => {
   render(
     <RouterContext.Provider value={MockRouter}>
-      <LogoGrouped />
+      <Logo />
     </RouterContext.Provider>
   );
   expect(screen.getByTestId('logo-link')).toHaveAttribute('href', '/');
@@ -40,7 +40,7 @@ describe('when button is clicked', () => {
 
     render(
       <RouterContext.Provider value={router}>
-        <LogoGrouped />
+        <Logo />
       </RouterContext.Provider>
     );
 
@@ -54,7 +54,7 @@ describe('when button is clicked', () => {
 
     render(
       <RouterContext.Provider value={router}>
-        <LogoGrouped />
+        <Logo />
       </RouterContext.Provider>
     );
 

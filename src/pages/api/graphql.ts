@@ -1,7 +1,8 @@
+/* eslint-disable consistent-return */
 import { ApolloServer } from 'apollo-server-micro';
 import Cors from 'micro-cors';
-import { schema } from '../../../graphql/schema';
-import { createContext } from '../../../graphql/context';
+import { schema } from '../../graphql/schema';
+import { createContext } from '../../graphql/context';
 
 const cors = Cors();
 
@@ -13,7 +14,7 @@ const apolloServer = new ApolloServer({
 
 const startServer = apolloServer.start();
 
-export default cors(async function (req, res) {
+export default cors(async function (req: any, res: any) {
   if (req.method === 'OPTIONS') {
     res.end();
     return false;

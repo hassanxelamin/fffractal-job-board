@@ -5,7 +5,7 @@ import '../styles/globals.css';
 import { SessionProvider } from 'next-auth/react';
 import { NavBar } from 'src/components';
 import { ApolloProvider } from '@apollo/client';
-import apolloClient from '../../lib/apollo';
+import apolloClient from '../lib/apollo';
 
 export default function MyApp({
   Component,

@@ -1,1 +1,1 @@
-export { MyJobs } from './my-jobs'
+export { MyJobs } from './my-jobs';

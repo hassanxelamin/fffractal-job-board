@@ -1,1 +1,1 @@
-export { ButtonGradient } from "./button";
+export { ButtonGradient } from './button';
