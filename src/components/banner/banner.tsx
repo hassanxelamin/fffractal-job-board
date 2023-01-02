@@ -6,7 +6,7 @@ import React from 'react';
 
 export function Banner() {
   return (
-    <div className="font-satoshi font-bold h-[28.75px] bg-black text-white text-[12px] flex items-center">
+    <div className="font-satoshi font-bold h-[28.75px] bg-black text-white text-[12px] flex items-center overflow-hidden">
       <div className="flex items-center whitespace-nowrap animate-marquee">
         <div className="py-12 animate-marquee whitespace-nowrap">
           <span className="ml-[12px]">BROWSE JOBS IN XR, AI, & CRYPTO</span>

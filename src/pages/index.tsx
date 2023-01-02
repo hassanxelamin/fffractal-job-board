@@ -2,7 +2,7 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-// import { EmailForm, Jobs } from 'src/components';
+import { TitleSection, EmailForm } from 'src/components';
 
 const Home: NextPage = () => {
   return (
@@ -15,11 +15,13 @@ const Home: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* <div> */}
-      {/* <EmailForm /> */}
-      {/* <TitleSection /> */}
+      <div className="flex flex-col justify-center items-center mt-[40px] xl:mt-[83px] overflow-hidden">
+        <TitleSection />
+      </div>
+      <div className="flex flex-col justify-center items-center overflow-hidden">
+        <EmailForm />
+      </div>
       {/* <Jobs /> */}
-      {/* </div> */}
     </div>
   );
 };

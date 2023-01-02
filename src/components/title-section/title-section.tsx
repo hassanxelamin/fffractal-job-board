@@ -1,37 +1,33 @@
 import React from 'react';
-import styled from 'styled-components';
 import TypeIt from 'typeit-react';
-import { Gradient, GradientTextWrap } from '../../helpers/css-mixins/gradient';
 
 export function TitleSection() {
   return (
-    <div className="flex items-center justify-center overflow-hidden h-[603px]">
-      <div className="flex flex-col items-center justify-center">
-        <div className="text-center text-[92px] font-bold w-[1250px] h-[260px] leading-[40px] mb-[26px]">
-          <div>Join startups with the best in &nbsp;</div>
-          <TypeTitle
-            options={{ speed: 150, loop: true }}
-            getBeforeInit={(instance: any) => {
-              instance
-                .type('Artificial Intelligence', { delay: 2000 })
-                .delete(null, { delay: 1000 });
-              instance
-                .type('Extended Reality', { delay: 2000 })
-                .delete(null, { delay: 1000 });
-              instance
-                .type('Cryptocurrency', { delay: 2000 })
-                .delete(null, { delay: 1000 });
-              return instance;
-            }}
-          />
-        </div>
+    <div
+      className="font-satoshi font-bold text-center whitespace-nowrap
+                 text-[28px] sm:text-[35px] md:text-[45px] lg:text-[60px] xl:text-[70px] 2xl:text-[80px]
+                 min-w-[40px] md:w-[1071px] 
+                 h-[90px] sm:h-[120px] md:h-[140px] lg:h-[190px] xl:h-[216px] 2xl:h-[216px]"
+    >
+      <div className="h-[40px] sm:h-[50px] md:h-[65px] lg:h-[85px] xl:h-[100px]">
+        Join startups with the best in &nbsp;
       </div>
+      <TypeIt
+        className="text-[28px] sm:text-[35px] md:text-[45px] lg:text-[60px] xl:text-[70px] 2xl:text-[80px]"
+        options={{ speed: 150, loop: true }}
+        getBeforeInit={(instance: any) => {
+          instance
+            .type('Artificial Intelligence', { delay: 2000 })
+            .delete(null, { delay: 1000 });
+          instance
+            .type('Extended Reality', { delay: 2000 })
+            .delete(null, { delay: 1000 });
+          instance
+            .type('Cryptocurrency', { delay: 2000 })
+            .delete(null, { delay: 1000 });
+          return instance;
+        }}
+      />
     </div>
   );
 }
-
-const TypeTitle = styled(TypeIt)`
-  ${Gradient};
-  ${GradientTextWrap}
-  font-size: 9.2rem;
-`;
