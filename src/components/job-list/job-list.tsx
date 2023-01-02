@@ -1,18 +1,8 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable no-param-reassign */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+import React from 'react';
 import uuid from 'react-uuid';
-import axios from 'axios';
-import { gql, useQuery, useLazyQuery } from '@apollo/client';
-
-interface FormValues {
-  company: string;
-  website: string;
-  title: string;
-  commitment: string;
-  location: string;
-  remote: boolean;
-  urlOrEmail: string;
-  description: string;
-}
+import { gql, useLazyQuery } from '@apollo/client';
 
 const getUniqueUserPosts = gql`
   query GetSinglePost($postId: String) {
@@ -31,12 +21,24 @@ const getUniqueUserPosts = gql`
   }
 `;
 
-export function JobList({ jobs, fetchMore, endCursor, hasNextPage, hasPreviousPage, startCursor }) {
-  const [getSingle, { data }] = useLazyQuery(getUniqueUserPosts);
+interface JobsProps {
+  jobs: [];
+  fetchMore: (variable: {}) => {};
+  endCursor: string;
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
+  startCursor: string;
+}
 
-  if (data) {
-    console.log(data.getSinglePost[0].company);
-  }
+export function JobList({
+  jobs,
+  fetchMore,
+  endCursor,
+  hasNextPage,
+  hasPreviousPage,
+  startCursor,
+}: JobsProps) {
+  const [getSingle, { data }] = useLazyQuery(getUniqueUserPosts);
 
   return (
     <div
@@ -46,7 +48,8 @@ export function JobList({ jobs, fetchMore, endCursor, hasNextPage, hasPreviousPa
       <table className="w-full h-[112px] border-solid border-black">
         {jobs &&
           jobs.map((job) => {
-            const { id } = job;
+            const { id, node } = job;
+            const { title, company, location } = node;
             return (
               <tbody
                 key={uuid()}
@@ -61,10 +64,10 @@ export function JobList({ jobs, fetchMore, endCursor, hasNextPage, hasPreviousPa
                       <div className="absolute top-[21px] left-[12px] w-[46px] h-[46px] border-[1px] border-solid border-black rounded-[5px]" />
                       <div>
                         <h2 className="absolute top-[1.7rem] left-[7.4rem] text-[1.6rem] font-semibold">
-                          {job.node.title}
+                          {title}
                         </h2>
                         <h3 className="absolute top-[45px] left-[74px] text-[16px]">
-                          {job.node.company}
+                          {company}
                         </h3>
                         <p className="absolute top-[79px] left-[74px] text-[16px] text-[#6A6A6A]">
                           $180k - 250k
@@ -75,7 +78,7 @@ export function JobList({ jobs, fetchMore, endCursor, hasNextPage, hasPreviousPa
 
                   <td>
                     <p className="absolute top-[17px] right-[16px] text-[16px]">
-                      {job.node.location}
+                      {location}
                     </p>
                   </td>
 
@@ -92,11 +95,12 @@ export function JobList({ jobs, fetchMore, endCursor, hasNextPage, hasPreviousPa
           })}
         {hasNextPage ? (
           <button
+            type="button"
             onClick={() => {
               fetchMore({
                 variables: { after: endCursor },
-                updateQuery: (prevResult,{ fetchMoreResult }) => {
-                  if (!fetchMoreResult) return prevResult
+                updateQuery: (prevResult: any, { fetchMoreResult }: any) => {
+                  if (!fetchMoreResult) return prevResult;
                   fetchMoreResult.getPosts.edges = [
                     ...fetchMoreResult.getPosts.edges,
                   ];
@@ -107,24 +111,32 @@ export function JobList({ jobs, fetchMore, endCursor, hasNextPage, hasPreviousPa
           >
             forward
           </button>
-        ) : (
+        ) : null}
+
+        {hasPreviousPage ? (
           <button
-          onClick={() => {
-            fetchMore({
-              variables: { first: undefined, after: undefined, last: -6, before: startCursor },
-              updateQuery: (prevResult,{ fetchMoreResult }) => {
-                if (!fetchMoreResult) return prevResult
-                fetchMoreResult.getPosts.edges = [
-                  ...fetchMoreResult.getPosts.edges,
-                ];
-                return fetchMoreResult;
-              },
-            });
-          }}
-        >
-          back
-        </button>
-        )}
+            type="button"
+            onClick={() => {
+              fetchMore({
+                variables: {
+                  first: undefined,
+                  after: undefined,
+                  last: -6,
+                  before: startCursor,
+                },
+                updateQuery: (prevResult: any, { fetchMoreResult }: any) => {
+                  if (!fetchMoreResult) return prevResult;
+                  fetchMoreResult.getPosts.edges = [
+                    ...fetchMoreResult.getPosts.edges,
+                  ];
+                  return fetchMoreResult;
+                },
+              });
+            }}
+          >
+            back
+          </button>
+        ) : null}
       </table>
       {data ? (
         <div className="bg-[#deb887] w-full">

@@ -1,25 +1,26 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
-import { useFormik } from 'formik';
+// import { useFormik } from 'formik';
 
-interface FormValues {
-  keyword: string;
-}
+// interface FormValues {
+//   keyword: string;
+// }
 
 export function SearchBar() {
-  const formik = useFormik<FormValues>({
-    initialValues: {
-      keyword: '',
-    },
-    async onSubmit(values: FormValues) {
-      try {
-        if (typeof onSubmit === 'function') {
-          await onSubmit({ variables: { ...values } });
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    },
-  });
+  // const formik = useFormik<FormValues>({
+  //   initialValues: {
+  //     keyword: '',
+  //   },
+  //   async onSubmit(values: FormValues) {
+  //     try {
+  //       if (typeof onSubmit === 'function') {
+  //         await onSubmit({ variables: { ...values } });
+  //       }
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //   },
+  // });
 
   return (
     <form className="bg-white opacity-50 overflow-hidden flex items-center justify-center mt-[7.7rem] mb-[7.7rem]">

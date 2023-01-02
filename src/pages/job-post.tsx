@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { ListingForm } from 'src/components';
 import { gql, useQuery, useMutation } from '@apollo/client';
@@ -49,9 +48,11 @@ const createPosts = gql`
   }
 `;
 
-// ADD TYPES FOR DATA //
+interface JobPostProps {
+  sessionEmail: string;
+}
 
-const JobPost = ({ sessionEmail }) => {
+const JobPost = ({ sessionEmail }: JobPostProps) => {
   // const [user, setUser] = use
   const [addPost] = useMutation(createPosts);
 
@@ -62,11 +63,11 @@ const JobPost = ({ sessionEmail }) => {
   if (loading) {
     return (
       <div>
-        <ListingForm redirectPath="/" onSubmit={addPost} />
+        <ListingForm redirectPath="/" onSubmit={addPost} userId="" />
       </div>
     );
   }
-  
+
   return (
     <div>
       <ListingForm

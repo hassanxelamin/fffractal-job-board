@@ -1,7 +1,7 @@
 import React from 'react';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { getAuthSession } from '@utils/auth/get-server-session';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import { gql, useQuery } from '@apollo/client';
 import { MyJobs } from '../components/my-jobs';
 
@@ -21,22 +21,26 @@ const getUniqueUserPosts = gql`
   }
 `;
 
-const Jobs = ({ sessionEmail }) => {
+interface JobPostProps {
+  sessionEmail: string;
+}
+
+const Jobs = ({ sessionEmail }: JobPostProps) => {
   const { data, loading } = useQuery(getUniqueUserPosts, {
     variables: { email: sessionEmail },
   });
 
-  const router = useRouter();
+  // const router = useRouter();
 
-  const refreshPage = () => {
-    router.replace(router.asPath);
-  };
+  // const refreshPage = () => {
+  //   router.replace(router.asPath);
+  // };
 
-  if (loading) return <div>loading</div>
+  if (loading) return <div>loading</div>;
 
   return (
     <div className="flex items-center justify-center">
-      <MyJobs jobs={data.getUserPost} refresh={refreshPage} />
+      <MyJobs jobs={data.getUserPost} />
     </div>
   );
 };

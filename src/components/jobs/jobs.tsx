@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { gql, useQuery } from '@apollo/client';
-import { JobList } from '../job-list';
-import { JobDetails } from '../job-details';
 import { SearchBar } from 'src/components';
+import { JobList } from '../job-list';
+// import { JobDetails } from '../job-details';
 
 const getAllPosts = gql`
-  query($first: Int, $last: Int, $after: String, $before: String) {
+  query ($first: Int, $last: Int, $after: String, $before: String) {
     getPosts(first: $first, last: $last, after: $after, before: $before) {
       edges {
         cursor
@@ -47,7 +47,8 @@ export function Jobs() {
     return <div>loading</div>;
   }
 
-  const { endCursor, hasNextPage, hasPreviousPage, startCursor } = data.getPosts.pageInfo;
+  const { endCursor, hasNextPage, hasPreviousPage, startCursor } =
+    data.getPosts.pageInfo;
 
   // console.log(data)
   // const fetchJobDetails = (value) => {
