@@ -1,11 +1,9 @@
 import React from 'react';
 import { DecoratorFn } from '@storybook/react';
-import { GlobalStyles } from '../src/utils/css-mixins';
 
 const withTheme: DecoratorFn = (StoryFn) => {
   return (
     <>
-      <GlobalStyles />
       <StoryFn />
     </>
   );
