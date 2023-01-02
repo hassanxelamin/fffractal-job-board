@@ -9,3 +9,4 @@ export { ListingForm } from './listing-form';
 export { SearchBar } from './search-bar';
 export { Jobs } from './jobs';
 export { MyJobs } from './my-jobs';
+export { Banner } from './banner';

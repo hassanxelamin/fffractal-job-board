@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /* eslint-disable consistent-return */
 import { ApolloServer } from 'apollo-server-micro';
 import Cors from 'micro-cors';
