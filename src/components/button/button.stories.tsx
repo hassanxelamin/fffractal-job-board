@@ -15,22 +15,20 @@ import { expect } from '@storybook/jest';
 /*
  * Components
  */
-import { ButtonGradient } from './button';
+import { Button } from './button';
 
 // Metadata of our component
 export default {
   title: 'Components/Buttons',
-  component: ButtonGradient,
+  component: Button,
   args: { text: 'Post a Job!' },
   argTypes: {
     onClick: { action: true },
   },
-} as ComponentMeta<typeof ButtonGradient>;
+} as ComponentMeta<typeof Button>;
 
 // Base Template
-const Template: ComponentStory<typeof ButtonGradient> = (args) => (
-  <ButtonGradient {...args} />
-);
+const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
 // Story, a component variation consisting of a template + args
 export const Default = Template.bind({});

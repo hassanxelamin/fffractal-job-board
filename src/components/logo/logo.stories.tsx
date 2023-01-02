@@ -21,3 +21,12 @@ const Template: ComponentStory<typeof Logo> = () => <Logo />;
 
 // Story, a component variation consisting of a template + args
 export const Default = Template.bind({});
+Default.parameters = {
+  nextRouter: {
+    path: '/',
+    asPath: '/',
+    query: {
+      id: '',
+    },
+  },
+};

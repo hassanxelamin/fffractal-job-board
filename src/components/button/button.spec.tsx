@@ -11,17 +11,17 @@ import '@testing-library/jest-dom';
  * Mock Utils
  */
 import { RouterContext } from 'next/dist/shared/lib/router-context';
-import { MockRouter } from 'src/helpers/test-utils';
+import { MockRouter } from '../../helpers/mock-router/mock-router';
 
 /*
  * Components
  */
-import { ButtonGradient } from './button';
+import { Button } from './button';
 
 it('has an anchor tag with href="/job-post"', () => {
   render(
     <RouterContext.Provider value={MockRouter}>
-      <ButtonGradient text="Post a Job" />
+      <Button text="Post a Job" />
     </RouterContext.Provider>
   );
   expect(screen.getByRole('link')).toHaveAttribute('href', '/job-post');
@@ -33,7 +33,7 @@ describe('when button is clicked', () => {
 
     render(
       <RouterContext.Provider value={router}>
-        <ButtonGradient text="Post a Job" />
+        <Button text="Post a Job" />
       </RouterContext.Provider>
     );
 

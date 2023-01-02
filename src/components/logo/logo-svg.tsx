@@ -1,20 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const Svgs = styled.svg`
-  width: 33px;
-  height: 50px;
-`;
-
-const Path = styled.path``;
 
 export function LogoSVG() {
   return (
-    <Svgs
+    <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="40.695"
-      height="61.654"
+      width="23"
+      height="34"
       viewBox="0 0 40.695 61.654"
+      className="w-[23px] h-[34px]"
     >
       <g id="Final_1" data-name="Final 1" transform="translate(0 0.003)">
         <rect
@@ -67,7 +60,7 @@ export function LogoSVG() {
                 transform="translate(19.7 23.74)"
                 fill="#fff"
               />
-              <Path
+              <path
                 id="Vector-7"
                 data-name="Vector"
                 d="M4.71,16.7l-.02.01.02.01V45.5L0,49.89V14.59L15.64,0h.01V6.49Z"
@@ -406,6 +399,6 @@ export function LogoSVG() {
           </g>
         </g>
       </g>
-    </Svgs>
+    </svg>
   );
 }

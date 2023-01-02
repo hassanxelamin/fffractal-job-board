@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Modal, Logo, Dropdown, ButtonGradient } from '..';
+import { Modal, Logo, Dropdown, Button } from '..';
 
 export const NavBar = () => {
   const [isModalOpen, setModalOpen] = useState(true);
@@ -14,7 +14,7 @@ export const NavBar = () => {
       <Logo />
       <div className="flex items-center justify-center">
         <Dropdown toggleModal={toggleModal} />
-        <ButtonGradient text="Post a Job!" />
+        <Button text="Post a Job!" />
       </div>
       <Modal toggleModal={toggleModal} visible={isModalOpen} />
     </div>

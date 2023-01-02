@@ -10,7 +10,8 @@ module.exports = {
     extend: {
       fontFamily: {
         grotesk: 'Grotesk',
-        satoshi: 'Satoshi'
+        satoshi: 'Satoshi',
+        gilmer: 'Gilmer'
       },
       // keyframes: {
       //   animatedgradient: {

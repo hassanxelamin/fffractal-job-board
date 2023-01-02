@@ -68,9 +68,9 @@ export const AuthModal = ({ toggleModal }: AuthProps) => {
       <div className="bg-white w-[448px] h-[420px] shadow-[0_20px_25px_10px_rgba(0,0,0,0.1),0_8px_10px_-10px_rgba(0,0,0,0.1)] relative rounded-[10px] flex flex-col items-center justify-center text-center">
         <div
           onClick={toggleModal}
-          className="transition hover:bg-[#F3F4F6] focus:outline-none absolute top-[1rem] right-[1rem] pt-[0.5rem] pr-[0.5rem] pl-[0.5rem] shrink-0 rounded-[0.375rem]"
+          className="transition w-[3rem] h-[3rem] hover:bg-[#F3F4F6] focus:outline-none absolute top-[1rem] right-[1rem] pt-[0.5rem] pr-[0.5rem] pl-[0.5rem] shrink-0 rounded-[0.375rem]"
         >
-          <XIcon className="w-[2rem] h-[2rem]" />
+          <XIcon />
         </div>
 
         <div className="absolute top-[15%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
