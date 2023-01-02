@@ -13,6 +13,8 @@ import { PrismaClient } from '@prisma/client';
 // Instantiate Prisma Client
 const prisma = new PrismaClient();
 
+console.log(process.env.NEXT_PUBLIC_EMAIL_SERVER_USER)
+
 export const authOptions = {
   pages: {
     signIn: '/',
