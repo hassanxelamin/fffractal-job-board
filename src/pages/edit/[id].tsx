@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { ListingForm } from 'src/components';
 import { useRouter } from 'next/router';

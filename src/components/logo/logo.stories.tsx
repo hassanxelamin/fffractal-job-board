@@ -8,16 +8,16 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 /*
  * Components
  */
-import { LogoGrouped } from '@features/ui/header/logo';
+import { Logo } from './logo';
 
 // Metadata of our component
 export default {
   title: 'Components/Logo',
-  component: LogoGrouped,
-} as ComponentMeta<typeof LogoGrouped>;
+  component: Logo,
+} as ComponentMeta<typeof Logo>;
 
 // Base Template
-const Template: ComponentStory<typeof LogoGrouped> = () => <LogoGrouped />;
+const Template: ComponentStory<typeof Logo> = () => <Logo />;
 
 // Story, a component variation consisting of a template + args
 export const Default = Template.bind({});

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-hot-toast';
 import { useFormik } from 'formik';
@@ -43,7 +43,7 @@ export const ListingForm = (props: MyFormProps) => {
         toastId = toast.loading('Submitting...');
         // Submit data
         if (typeof onSubmit === 'function') {
-          await onSubmit({ variables: { ...values, userId }});
+          await onSubmit({ variables: { ...values, userId } });
         }
         toast.success('Successfully submitted', { id: toastId });
         // Redirect user
@@ -198,9 +198,7 @@ export const ListingForm = (props: MyFormProps) => {
 
           <div>
             <div>
-              <label htmlFor="description">
-                Job Description
-              </label>
+              <label htmlFor="description">Job Description</label>
             </div>
           </div>
 
