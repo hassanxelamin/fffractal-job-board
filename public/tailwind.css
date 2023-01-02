@@ -484,6 +484,18 @@ video {
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Gilmer';
+
+  src: url('/GilmerBold.woff2') format('woff2');
+
+  font-weight: 700;
+
+  font-style: normal;
+
+  font-display: swap;
+}
+
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -622,8 +634,8 @@ video {
   top: 50px;
 }
 
-.left-\[10px\] {
-  left: 10px;
+.left-\[3px\] {
+  left: 3px;
 }
 
 .top-\[21px\] {
@@ -690,8 +702,8 @@ video {
   margin-left: 12px;
 }
 
-.mr-\[3\.2rem\] {
-  margin-right: 3.2rem;
+.mr-\[16px\] {
+  margin-right: 16px;
 }
 
 .mr-\[0\.5rem\] {
@@ -706,6 +718,14 @@ video {
   margin-top: 7px;
 }
 
+.mr-\[5px\] {
+  margin-right: 5px;
+}
+
+.ml-\[5px\] {
+  margin-left: 5px;
+}
+
 .mb-\[32px\] {
   margin-bottom: 32px;
 }
@@ -718,12 +738,8 @@ video {
   margin-top: 32px;
 }
 
-.mr-\[2rem\] {
-  margin-right: 2rem;
-}
-
-.ml-\[2rem\] {
-  margin-left: 2rem;
+.mr-\[11px\] {
+  margin-right: 11px;
 }
 
 .mr-\[20px\] {
@@ -766,16 +782,12 @@ video {
   height: 420px;
 }
 
-.h-\[2rem\] {
-  height: 2rem;
+.h-\[3rem\] {
+  height: 3rem;
 }
 
 .h-\[5rem\] {
   height: 5rem;
-}
-
-.h-\[3rem\] {
-  height: 3rem;
 }
 
 .h-\[28\.75px\] {
@@ -786,12 +798,16 @@ video {
   height: 42px;
 }
 
-.h-\[30px\] {
-  height: 30px;
+.h-\[35px\] {
+  height: 35px;
 }
 
 .h-\[100\%\] {
   height: 100%;
+}
+
+.h-\[30px\] {
+  height: 30px;
 }
 
 .h-\[791px\] {
@@ -814,8 +830,8 @@ video {
   height: 38px;
 }
 
-.h-\[4\.9rem\] {
-  height: 4.9rem;
+.h-\[34px\] {
+  height: 34px;
 }
 
 .h-\[120px\] {
@@ -846,8 +862,8 @@ video {
   width: 448px;
 }
 
-.w-\[2rem\] {
-  width: 2rem;
+.w-\[3rem\] {
+  width: 3rem;
 }
 
 .w-\[5rem\] {
@@ -892,6 +908,10 @@ video {
 
 .w-\[256px\] {
   width: 256px;
+}
+
+.w-\[23px\] {
+  width: 23px;
 }
 
 .w-\[372px\] {
@@ -1073,10 +1093,6 @@ video {
   border-bottom-width: 3px;
 }
 
-.border-l-\[1px\] {
-  border-left-width: 1px;
-}
-
 .border-solid {
   border-style: solid;
 }
@@ -1175,8 +1191,8 @@ video {
   font-family: Satoshi;
 }
 
-.font-grotesk {
-  font-family: Grotesk;
+.font-gilmer {
+  font-family: Gilmer;
 }
 
 .text-\[2rem\] {
@@ -1215,10 +1231,6 @@ video {
   font-size: 20px;
 }
 
-.text-\[4rem\] {
-  font-size: 4rem;
-}
-
 .text-\[1\.1rem\] {
   font-size: 1.1rem;
 }
@@ -1247,10 +1259,6 @@ video {
   font-weight: 600;
 }
 
-.font-medium {
-  font-weight: 500;
-}
-
 .italic {
   font-style: italic;
 }
@@ -1261,10 +1269,6 @@ video {
 
 .leading-\[40px\] {
   line-height: 40px;
-}
-
-.tracking-\[-0\.2rem\] {
-  letter-spacing: -0.2rem;
 }
 
 .text-white {

@@ -2,7 +2,7 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { EmailForm, Jobs } from 'src/components';
+// import { EmailForm, Jobs } from 'src/components';
 
 const Home: NextPage = () => {
   return (
@@ -15,11 +15,11 @@ const Home: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
-        <EmailForm />
-        {/* <TitleSection /> */}
-        <Jobs />
-      </div>
+      {/* <div> */}
+      {/* <EmailForm /> */}
+      {/* <TitleSection /> */}
+      {/* <Jobs /> */}
+      {/* </div> */}
     </div>
   );
 };

@@ -11,7 +11,7 @@ import '@testing-library/jest-dom';
  * Mock Utils
  */
 import { RouterContext } from 'next/dist/shared/lib/router-context';
-import { MockRouter } from 'src/helpers/test-utils';
+import { MockRouter } from '../../helpers/mock-router/mock-router';
 
 /*
  * Components

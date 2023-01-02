@@ -6,6 +6,7 @@ module.exports = {
     '@storybook/addon-interactions',
     'storybook-addon-next',
     'storybook-addon-next-router',
+    '@tomfreudenberg/next-auth-mock/storybook',
   ],
   framework: '@storybook/react',
   core: {

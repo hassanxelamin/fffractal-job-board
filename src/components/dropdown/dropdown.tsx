@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable react/button-has-type */
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import uuid from 'react-uuid';
@@ -11,8 +11,40 @@ interface Props {
   toggleModal: () => void;
 }
 
+export default function useOnClickOutside(
+  ref: React.MutableRefObject<HTMLDivElement>,
+  handler: (event: any) => void
+) {
+  useEffect(
+    () => {
+      const listener = (event: any) => {
+        // Do nothing if clicking ref's element or descendent elements
+        const target = event.target as HTMLElement;
+        if (!ref.current || ref.current.contains(target)) {
+          return;
+        }
+        handler(event);
+      };
+      document.addEventListener('mousedown', listener);
+      document.addEventListener('touchstart', listener);
+      return () => {
+        document.removeEventListener('mousedown', listener);
+        document.removeEventListener('touchstart', listener);
+      };
+    },
+    // Add ref and handler to effect dependencies
+    // It's worth noting that because the passed-in handler is a new ...
+    // ... function on every render that will cause this effect ...
+    // ... callback/cleanup to run every render. It's not a big deal ...
+    // ... but to optimize you can wrap handler in useCallback before ...
+    // ... passing it into this hook.
+    [ref, handler]
+  );
+}
+
 export function Dropdown({ toggleModal }: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
 
   const { data: session } = useSession();
   const user = session?.user;
@@ -21,8 +53,10 @@ export function Dropdown({ toggleModal }: Props) {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  useOnClickOutside(ref, () => setIsMenuOpen(false));
+
   return (
-    <div className="relative mr-[3.2rem]">
+    <div ref={ref} className="relative mr-[16px]">
       <button
         onClick={() => {
           toggleMenu();
@@ -44,13 +78,13 @@ export function Dropdown({ toggleModal }: Props) {
       </button>
 
       {isMenuOpen ? (
-        <div className="dropdown-menu flex items-center justify-center flex-col absolute top-[50px] left-[10px] width-[123px] rounded-[10px] shadow-2xl">
+        <div className="dropdown-menu flex items-center justify-center flex-col absolute top-[50px] left-[3px] width-[123px] rounded-[10px] shadow-2xl">
           {!user ? (
             <ul>
               {ItemsLoggedOut.map((item) => (
                 <div
                   key={uuid()}
-                  className="flex items-center mb-[7px] mt-[7px] w-[110px] h-[30px] rounded-[10px] hover:bg-[#f5f5f5]"
+                  className="flex items-center mb-[7px] mt-[7px] mr-[5px] ml-[5px] w-[110px] h-[35px] rounded-[10px] hover:bg-[#f5f5f5]"
                 >
                   {item.name === 'Sign in' ? (
                     <div
