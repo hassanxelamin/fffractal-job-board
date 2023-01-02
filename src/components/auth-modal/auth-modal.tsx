@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Link from 'next/link';
 import { XIcon, MailOpenIcon } from '@heroicons/react/outline';
 import { toast } from 'react-hot-toast';
@@ -7,6 +7,7 @@ import { Formik, Form } from 'formik';
 import { signIn } from 'next-auth/react';
 import { Input } from './input';
 import { LogoSVG } from '../logo/logo-svg';
+import useOnClickOutside from '../../helpers/outside-click/outside-click';
 
 interface EmailProps {
   email: string;
@@ -14,6 +15,7 @@ interface EmailProps {
 
 interface AuthProps {
   toggleModal: () => void;
+  setModal: () => void;
 }
 
 const SignInSchema = Yup.object().shape({
@@ -35,9 +37,10 @@ const Confirm = ({ email = '' }: EmailProps) => (
   </div>
 );
 
-export const AuthModal = ({ toggleModal }: AuthProps) => {
+export const AuthModal = ({ toggleModal, setModal }: AuthProps) => {
   const [showConfirm, setConfirm] = useState(false);
   const [disabled, setDisabled] = useState(false);
+  const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
 
   const signInWithEmail = async ({ email }: EmailProps) => {
     let toastId;
@@ -63,9 +66,14 @@ export const AuthModal = ({ toggleModal }: AuthProps) => {
     }
   };
 
+  useOnClickOutside(ref, () => setModal);
+
   return (
     <div className="flex items-center justify-center backdrop-blur-[4px] z-50 h-full w-full absolute left-0 top-0 overflow-hidden">
-      <div className="bg-white w-[448px] h-[420px] shadow-[0_20px_25px_10px_rgba(0,0,0,0.1),0_8px_10px_-10px_rgba(0,0,0,0.1)] relative rounded-[10px] flex flex-col items-center justify-center text-center">
+      <div
+        ref={ref}
+        className="bg-white w-[380px] h-[400px] sm:w-[448px] sm:h-[420px] shadow-[0_20px_25px_10px_rgba(0,0,0,0.1),0_8px_10px_-10px_rgba(0,0,0,0.1)] relative rounded-[10px] flex flex-col items-center justify-center text-center"
+      >
         <div
           onClick={toggleModal}
           className="transition w-[3rem] h-[3rem] hover:bg-[#F3F4F6] focus:outline-none absolute top-[1rem] right-[1rem] pt-[0.5rem] pr-[0.5rem] pl-[0.5rem] shrink-0 rounded-[0.375rem]"

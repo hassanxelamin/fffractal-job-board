@@ -4,10 +4,11 @@ import { AuthModal } from './auth-modal';
 interface Props {
   visible: boolean;
   toggleModal: () => void;
+  setModal: () => void;
 }
 
-export const Modal = ({ visible, toggleModal }: Props) => {
+export const Modal = ({ visible, toggleModal, setModal }: Props) => {
   if (visible) return null;
 
-  return <AuthModal toggleModal={toggleModal} />;
+  return <AuthModal toggleModal={toggleModal} setModal={setModal} />;
 };

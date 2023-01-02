@@ -9,7 +9,7 @@ type ButtonProps = {
 export function Button({ text }: ButtonProps) {
   return (
     <Link href="/job-post" passHref legacyBehavior data-testid="custom-element">
-      <a className="flex items-center justify-center text-center h-[42px] rounded-[50px] bg-black text-white font-bold text-[1.2rem] border-none w-[123px]">
+      <a className="flex items-center justify-center text-center h-[30px] sm:h-[42px] rounded-[50px] bg-black text-white font-bold text-[1.2rem] border-none w-[90px] sm:w-[123px]">
         {text}
       </a>
     </Link>
