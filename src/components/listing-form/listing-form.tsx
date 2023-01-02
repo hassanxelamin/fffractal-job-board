@@ -1,8 +1,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useRef } from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-hot-toast';
 import { useFormik } from 'formik';
+import { Editor } from '@tinymce/tinymce-react';
+import { Editor as TinyMCEEditor } from 'tinymce';
 
 interface FormValues {
   company: string;
@@ -25,6 +27,8 @@ export const ListingForm = (props: MyFormProps) => {
   const router = useRouter();
 
   const { redirectPath, onSubmit, userId } = props;
+
+  const editorRef = useRef<TinyMCEEditor | null>(null);
 
   const formik = useFormik<FormValues>({
     initialValues: {
@@ -57,29 +61,30 @@ export const ListingForm = (props: MyFormProps) => {
   });
 
   return (
-    <div className="font-satoshi flex items-center justify-center w-full text-black">
+    <div className="font-satoshi flex items-center justify-center w-full text-black text-[14px]">
       <div className="w-[800px] flex flex-col justify-center">
-        <div className="text-[36px]">
+        <div className="text-[36px] mb-[32px]">
           <h1>
-            Hire the best. Share your job post with thousands of job seekers.
+            <span className="font-bold">Hire the best.</span> Share your job
+            post with thousands of job seekers.
           </h1>
         </div>
 
         <div>
-          <h2 className="text-[20px]">Company Details.</h2>
+          <h2 className="text-[20px] font-bold mb-[5px]">Company Details.</h2>
           <p className="text-[16px]">
             We will automatically create a company profile with all your job
             listings.
           </p>
         </div>
         <form onSubmit={formik.handleSubmit}>
-          <div className="flex gap-x-6">
+          <div className="flex gap-x-6 mt-[32px] mb-[32px]">
             <div>
               <label htmlFor="company-name">
-                Company Name
+                <span className="font-bold">Company Name</span>
                 <input
                   name="company"
-                  className="text-black text-center w-[392px] h-[38px] border-[1px] border-solid border-black rounded"
+                  className="text-black text-center w-[392px] h-[38px] border-[2px] border-solid border-black rounded"
                   id="company-name"
                   type="text"
                   onChange={formik.handleChange}
@@ -91,10 +96,10 @@ export const ListingForm = (props: MyFormProps) => {
 
             <div>
               <label htmlFor="website">
-                Website
+                <span className="font-bold">Website</span>
                 <input
                   name="website"
-                  className="text-black text-center w-[392px] h-[38px] border-[1px] border-solid border-black rounded"
+                  className="text-black text-center w-[392px] h-[38px] border-[2px] border-solid border-black rounded"
                   id="website"
                   type="text"
                   onChange={formik.handleChange}
@@ -105,20 +110,20 @@ export const ListingForm = (props: MyFormProps) => {
             </div>
           </div>
 
-          <div>
-            <h2 className="text-[20px]">Job Details.</h2>
+          <div className="mt-[32px] mb-[32px]">
+            <h2 className="text-[20px] mb-[5px] font-bold">Job Details.</h2>
             <p className="text-[16px]">
               Please be as detailed as possible describing the job opening.
             </p>
           </div>
 
-          <div className="flex gap-x-6">
+          <div className="flex gap-x-6 ">
             <div>
               <label htmlFor="job-title">
-                Job Title
+                <span className="font-bold">Job Title</span>
                 <input
                   name="title"
-                  className="text-black text-center w-[528px] h-[38px] border-[1px] border-solid border-black rounded"
+                  className="text-black text-center w-[528px] h-[38px] border-[2px] border-solid border-black rounded"
                   id="job-title"
                   type="text"
                   onChange={formik.handleChange}
@@ -130,11 +135,11 @@ export const ListingForm = (props: MyFormProps) => {
 
             <div>
               <label htmlFor="commitment">
-                Commitment
+                <span className="font-bold">Commitment</span>
                 <select
                   name="commitment"
                   id="commitment"
-                  className="text-[16px] w-[256px] h-[38px] border-[1px] border-black rounded-[3px] outline-none"
+                  className="text-[16px] w-[256px] h-[38px] border-[2px] border-black rounded-[3px] outline-none"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.commitment}
@@ -148,13 +153,13 @@ export const ListingForm = (props: MyFormProps) => {
             </div>
           </div>
 
-          <div className="flex gap-x-6 items-center">
+          <div className="flex gap-x-6 items-center mt-[32px] mb-[32px]">
             <div>
               <label htmlFor="primary-location">
-                Primary Location
+                <span className="font-bold">Primary Location</span>
                 <input
                   name="location"
-                  className="text-black text-center w-[528px] h-[38px] border-[1px] border-solid border-black rounded"
+                  className="text-black text-center w-[528px] h-[38px] border-[2px] border-solid border-black rounded"
                   id="primary-location"
                   type="text"
                   onChange={formik.handleChange}
@@ -174,18 +179,20 @@ export const ListingForm = (props: MyFormProps) => {
                   onBlur={formik.handleBlur}
                   checked={formik.values.remote}
                 />
-                Employees may work remotely
+                <span className="font-bold">Employees may work remotely</span>
               </label>
             </div>
           </div>
 
-          <div className="flex gap-x-6 items-center">
+          <div className="flex gap-x-6 items-center mt-[32px] mb-[32px]">
             <div>
               <label htmlFor="urlOrEmail">
-                Application URL or Public Email
+                <span className="font-bold">
+                  Application URL or Public Email
+                </span>
                 <input
                   name="urlOrEmail"
-                  className="text-black text-center w-[800px] h-[38px] border-[1px] border-solid border-black rounded"
+                  className="text-black text-center w-[800px] h-[38px] border-[2px] border-solid border-black rounded"
                   id="urlOrEmail"
                   type="text"
                   onChange={formik.handleChange}
@@ -198,12 +205,49 @@ export const ListingForm = (props: MyFormProps) => {
 
           <div>
             <div>
-              <label htmlFor="description">Job Description</label>
+              <label htmlFor="description">
+                <span className="font-bold">Job Description</span>
+              </label>
+              <Editor
+                onInit={(evt, editor) => {
+                  editorRef.current = editor;
+                }}
+                initialValue=""
+                init={{
+                  height: 500,
+                  menubar: false,
+                  plugins: [
+                    'advlist autolink lists link image charmap print preview anchor',
+                    'searchreplace visualblocks code fullscreen',
+                    'insertdatetime media table paste code help wordcount',
+                  ],
+                  toolbar:
+                    'undo redo | formatselect | ' +
+                    'bold italic backcolor | alignleft aligncenter ' +
+                    'alignright alignjustify | bullist numlist outdent indent | ' +
+                    'removeformat | help',
+                  content_style:
+                    'body { font-family:Helvetica,Arial,sans-serif; font-size:14px; }',
+                }}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.description}
+                onEditorChange={(e) => {
+                  formik.handleChange({
+                    target: { name: 'description', value: e },
+                  });
+                }}
+              />
             </div>
           </div>
 
-          <div>
-            <button type="submit">Post</button>
+          <div className="mt-[32px] mb-[32px] font-bold text-white">
+            <button
+              type="submit"
+              className="flex items-center text-white w-[123px] bg-[#000] flex items-center justify-center text-center h-[42px] rounded-[50px] font-bold text-[1.2rem] border-none w-[123px]"
+            >
+              Post
+            </button>
           </div>
         </form>
       </div>

@@ -1,9 +1,9 @@
 import React from 'react';
 import type { AppProps } from 'next/app';
 import { Toaster } from 'react-hot-toast';
-import '../styles/globals.css';
+import '../styles/tailwind.css';
 import { SessionProvider } from 'next-auth/react';
-import { NavBar } from 'src/components';
+import { NavBar, Banner } from 'src/components';
 import { ApolloProvider } from '@apollo/client';
 import apolloClient from '../lib/apollo';
 
@@ -14,6 +14,7 @@ export default function MyApp({
   return (
     <SessionProvider session={session}>
       <ApolloProvider client={apolloClient}>
+        <Banner />
         <NavBar />
         <Component {...pageProps} />
         <Toaster />
