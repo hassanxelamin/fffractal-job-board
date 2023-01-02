@@ -68,6 +68,10 @@
 body {
   font-family: 'Satoshi';
   font-weight: 400;
+  background-color: #f9f9f9;
+  /* opacity: 0.8; */
+  background-image: radial-gradient(#bcbcbc 0.5px, #f9f9f9 0.5px);
+  background-size: 10px 10px;
 }
 
 a {
