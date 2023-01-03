@@ -1,6 +1,5 @@
 import React from 'react';
 import { gql, useQuery } from '@apollo/client';
-import { SearchBar } from 'src/components';
 import { JobList } from '../job-list';
 // import { JobDetails } from '../job-details';
 
@@ -58,7 +57,6 @@ export function Jobs() {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <SearchBar />
       <JobList
         jobs={data.getPosts.edges}
         endCursor={endCursor}
