@@ -25,15 +25,13 @@ const getAllPosts = gql`
         startCursor
         endCursor
         hasNextPage
-        hasLastPage
+        hasPreviousPage
       }
     }
   }
 `;
 
 export function Jobs() {
-  // const [values, setValues] = useState({});
-
   const { data, error, loading, fetchMore } = useQuery(getAllPosts, {
     variables: {
       first: 6,
@@ -49,14 +47,8 @@ export function Jobs() {
   const { endCursor, hasNextPage, hasPreviousPage, startCursor } =
     data.getPosts.pageInfo;
 
-  // console.log(data)
-  // const fetchJobDetails = (value) => {
-  //   setValues(value);
-  //   console.log(values);
-  // };
-
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center mb-[108px]">
       <JobList
         jobs={data.getPosts.edges}
         endCursor={endCursor}
@@ -65,7 +57,7 @@ export function Jobs() {
         startCursor={startCursor}
         hasPreviousPage={hasPreviousPage}
       />
-      {/* <JobDetails setNewData={fetchJobDetails} /> */}
+      {/* <JobDetails /> */}
     </div>
   );
 }

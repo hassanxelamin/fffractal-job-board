@@ -34,7 +34,7 @@ export const PageInfo = objectType({
     t.string('startCursor');
     t.string('endCursor');
     t.boolean('hasNextPage');
-    t.boolean('hasLastPage');
+    t.boolean('hasPreviousPage');
   },
 });
 
@@ -103,33 +103,33 @@ export const PostsQuery = extendType({
         // if the intitial request returns links
         if (queryResults.length > 0) {
           // get the last element in previos result set
-          const lastLinkInResults = queryResults[queryResults.length - 1];
           const firstLinkInResults = queryResults[0];
+          const lastLinkInResults = queryResults[queryResults.length - 1];
           // cursor we'll return in subsequent requests
-          const myCursor = lastLinkInResults.id;
           const firstCursor = firstLinkInResults.id;
+          const lastCursor = lastLinkInResults.id;
 
-          // query after the cursor to check if we have nextPage
           const nextPageResults = await ctx.prisma.post.findMany({
             take: args.first,
             cursor: {
-              id: myCursor,
+              id: lastCursor,
+            },
+          });
+          // query after the cursor to check if we have nextPage
+          const lastPageResults = await ctx.prisma.post.findMany({
+            take: args.last,
+            cursor: {
+              id: lastCursor,
             },
           });
 
-          const lastPageResults = await ctx.prisma.post.findMany({
-            take: args.first,
-            cursor: {
-              id: myCursor,
-            },
-          });
           // returns resonse
           const result = {
             pageInfo: {
               startCursor: firstCursor,
-              endCursor: myCursor,
-              hasNextPage: nextPageResults.length >= args.first!,
-              hasPreviousPage: lastPageResults.length <= args.last!,
+              endCursor: lastCursor,
+              hasPreviousPage: lastPageResults.length < 6,
+              hasNextPage: nextPageResults.length >= 6,
               // if the number of items requested is greater than the response
               // of the 2nd query, we have another page.
             },
@@ -145,91 +145,6 @@ export const PostsQuery = extendType({
     });
   },
 });
-
-// export const PostsQuery = extendType({
-//   type: 'Query',
-//   definition(t) {
-//     t.field('getPosts', {
-//       type: 'Response',
-//       args: {
-//         first: intArg(),
-//         last: intArg(),
-//         after: stringArg(),
-//         before: stringArg(),
-//       },
-//       async resolve(_, args, ctx) {
-//         let queryResults = null;
-
-//         if (args.after) {
-//           // check if there is a cursor as the argument
-//           queryResults = await ctx.prisma.post.findMany({
-//             take: args.first, // the number of items to return from the database
-//             skip: 1, // skip the cursor
-//             cursor: {
-//               id: args.after, // the cursor
-//             },
-//           });
-//         } else if (args.before) {
-//           // check if there is a cursor as the argument
-//           queryResults = await ctx.prisma.post.findMany({
-//             take: args.last, // the number of items to return from the database
-//             skip: 1, // skip the cursor
-//             cursor: {
-//               id: args.before, // the cursor
-//             },
-//           });
-
-//         } else  {
-//           // if no cursor, this means that this is the first request
-//           // and we will return the first items in the database
-//           queryResults = await ctx.prisma.post.findMany({
-//             take: args.first,
-//           });
-//         }
-//         // if the intitial request returns links
-//         if (queryResults.length > 0) {
-//           // get the last element in previos result set
-//           const lastLinkInResults = queryResults[queryResults.length - 1];
-//           const firstLinkInResults = queryResults[0];
-//           // cursor we'll return in subsequent requests
-//           const myCursorLast = lastLinkInResults.id
-//           const myCursorFirst = firstLinkInResults.id
-
-//           // query after the cursor to check if we have nextPage
-//           const secondQueryResults = await ctx.prisma.post.findMany({
-//             take: args.first,
-//             cursor: {
-//               id: myCursorLast,
-//             },
-//           });
-//           const thirdQueryResults = await ctx.prisma.post.findMany({
-//             take: args.last,
-//             cursor: {
-//               id: myCursorFirst,
-//             },
-//           });
-//           // returns resonse
-//           const result = {
-//             pageInfo: {
-//               endCursor: myCursorLast,
-//               startCursor: myCursorFirst,
-//               hasNextPage: secondQueryResults.length >= args.first,
-//               hasLastPage: thirdQueryResults.length <= args.last,
-//               // if the number of items requested is greater than the response
-//               // of the 2nd query, we have another page.
-//             },
-//             edges: queryResults.map((post) => ({
-//               cursor: post.id,
-//               node: post,
-//             })),
-//           };
-//           return result
-//         }
-//       }
-//     },
-//     )
-//   }
-// })
 
 export const SinglePostQuery = extendType({
   type: 'Query',

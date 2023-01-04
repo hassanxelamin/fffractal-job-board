@@ -221,6 +221,7 @@ export const ListingForm = (props: MyFormProps) => {
                     'searchreplace visualblocks code fullscreen',
                     'insertdatetime media table paste code help wordcount',
                   ],
+                  advlist_bullet_styles: 'square',
                   toolbar:
                     'undo redo | formatselect | ' +
                     'bold italic backcolor | alignleft aligncenter ' +

@@ -2,7 +2,7 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { TitleSection, EmailForm, SearchBar } from 'src/components';
+import { TitleSection, EmailForm, SearchBar, Jobs } from 'src/components';
 
 const Home: NextPage = () => {
   return (
@@ -24,9 +24,9 @@ const Home: NextPage = () => {
       <div className="flex items-center justify-center">
         <SearchBar />
       </div>
-      {/* <div> */}
-      {/* <Jobs /> */}
-      {/* </div> */}
+      <div>
+        <Jobs />
+      </div>
     </div>
   );
 };
