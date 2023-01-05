@@ -78,7 +78,7 @@ export function Dropdown({ toggleModal }: Props) {
       </button>
 
       {isMenuOpen ? (
-        <div className="dropdown-menu flex items-center justify-center flex-col absolute top-[50px] left-[3px] width-[123px] rounded-[10px] shadow-2xl">
+        <div className="dropdown-menu bg-white flex items-center justify-center flex-col absolute top-[50px] left-[3px] width-[123px] rounded-[10px] shadow-2xl">
           {!user ? (
             <ul>
               {ItemsLoggedOut.map((item) => (

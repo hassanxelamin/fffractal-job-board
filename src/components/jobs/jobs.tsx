@@ -38,7 +38,7 @@ export function Jobs() {
     },
   });
 
-  if (error) return <p>Oops, something went wrong {error.message}</p>;
+  if (error) return <p>Oops, something went wrong {error.stack}</p>;
 
   if (loading) {
     return <div>loading</div>;
