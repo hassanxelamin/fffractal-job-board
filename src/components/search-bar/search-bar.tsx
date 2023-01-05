@@ -36,7 +36,7 @@ export function SearchBar() {
           What job are you looking for?
         </label>
         <input
-          className="h-[93px] w-[450px] sm:w-[550px] md:w-[700px] lg:w-[325px] xl:w-[372px] pt-[35px] pl-[15px]
+          className="h-[93px] w-[353px] sm:w-[550px] md:w-[700px] lg:w-[325px] xl:w-[372px] pt-[35px] pl-[15px]
                      border-solid border-[3px] border-black
                      rounded-tl-2xl rounded-t-2xl text-[36px] border-b-0 lg:border-b-[3px] lg:border-r-0 lg:rounded-r-none lg:rounded-bl-2xl"
           type="text"
@@ -55,7 +55,7 @@ export function SearchBar() {
           Where?
         </label>
         <input
-          className="h-[93px] w-[450px] sm:w-[550px] md:w-[700px] lg:w-[325px] xl:w-[372px] pt-[35px] pl-[15px]
+          className="h-[93px] w-[353px] sm:w-[550px] md:w-[700px] lg:w-[325px] xl:w-[372px] pt-[35px] pl-[15px]
                      border-solid border-[3px] border-black text-[3.6rem] border-b-0 lg:border-b-[3px]"
           type="text"
           id="where"
@@ -67,7 +67,7 @@ export function SearchBar() {
       {/* Checkbox */}
       <div
         className="flex items-center justify-center bg-white
-                   h-[93px] w-[450px] sm:w-[550px] md:w-[700px] lg:w-[325px] xl:w-[372px]
+                   h-[93px] w-[353px] sm:w-[550px] md:w-[700px] lg:w-[325px] xl:w-[372px]
                    border-[3px] border-solid border-black rounded-b-2xl lg:rounded-l-none lg:border-l-0 lg:rounded-tr-2xl"
       >
         {/* container */}

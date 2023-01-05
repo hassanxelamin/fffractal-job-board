@@ -51,7 +51,7 @@ export function JobList({
 
   return (
     <div
-      className="font-satoshi h-[791px] w-[450px] sm:w-[550px] md:w-[700px] lg:w-[975px] xl:w-[1120px] flex justify-between
+      className="font-satoshi h-[791px] w-[353px] sm:w-[550px] md:w-[700px] lg:w-[975px] xl:w-[1120px] flex justify-between
                border-[3px] border-solid border-black rounded-[10px] bg-white"
     >
       <table className="w-full h-[112px] border-solid border-black">
