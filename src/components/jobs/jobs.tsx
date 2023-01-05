@@ -32,11 +32,16 @@ const getAllPosts = gql`
 `;
 
 export function Jobs() {
-  const { data, error, loading, fetchMore } = useQuery(getAllPosts, {
-    variables: {
-      first: 6,
-    },
-  });
+
+  try {
+    const { data, error, loading, fetchMore } = useQuery(getAllPosts, {
+      variables: {
+        first: 6,
+      },
+    }); 
+  } catch (error) {
+    console.log(error)
+  }
 
   if (error) return <p>Oops, something went wrong {error.stack}</p>;
 
